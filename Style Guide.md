@@ -51,3 +51,37 @@ For example, the indented lines from a SELECT keyword indicates that the code re
 14    WHERE
 15    <mark>TA</mark>.DateColumn >= '1/1/2000'
 </pre>
+
+# Spaces
+* <em>Each section of SQL code should NOT have trailing spaces (trailing spaces are normally not visible unless you highlight multiple rows of text or your text editor settings are set to show spaces/tabs)</em>
+* <em>Operators in equations/conditions should have spaces before and after them</em>
+
+<span style="color: green"><strong>A. Good</strong></span>
+<pre>
+1    SELECT
+2	      TA.FieldOne
+3	    , TA.FieldTwo
+4	    , TA.FieldThree
+5	    , TA.FieldFour
+6
+7	FROM Database.Schema.TableAlpha AS TA
+8
+9	WHERE
+10	    TA.DateColumn >= '1/1/2000'
+</pre>
+
+<span style="color: red"><strong>B. Not so good</strong></span>
+<br/>
+<span style="color: red">Trailing spaces and no space before and after the “>=” operator</span>
+<pre>
+1    SELECT
+2	      TA.FieldOne
+3	    , TA.FieldTwo
+4	    , TA.FieldThree
+5	    , TA.FieldFour<mark>    </mark>
+6
+7	FROM Database.Schema.TableAlpha AS TA<mark> </mark>
+8
+9	WHERE
+10	    TA.DateColumn<mark>>=</mark>'1/1/2000'
+</pre>
