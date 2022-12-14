@@ -1,5 +1,5 @@
 # SQL Keywords
-<span style="color: green"><strong>A. Good</strong></span>
+## <span style="color: green">A. Good</span>
 * SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should always be in all caps
 <pre>
 <mark>SELECT</mark>
@@ -8,10 +8,8 @@
 <mark>WHERE</mark>
     CU.StartDate >= '1/1/2000'
 </pre>
-
-<span style="color: red"><strong>B. Not so good</strong></span>
+## <span style="color: red">B. Not so Good</span>
 * Keywords not in all caps
-<br/>
 <pre>
 <mark>select</mark>
     CU.Name
