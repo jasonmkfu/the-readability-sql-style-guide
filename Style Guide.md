@@ -1,4 +1,5 @@
 # SQL Keywords
+Capitalizing SQL keywords allows for easier comprehension by the reader by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in comprehension by coloring SQL keywords.
 ## <span style="color: green">A. Good</span>
 * SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should always be in all caps
 <pre>
@@ -19,13 +20,16 @@
 </pre>
 
 
-# Identation
+# Identation and Tabs/Spaces
+Indenting is common practice across all programming languages.  In SQL, it assists the comprehension of the code by the reader by using indentation to associate portions of code to SQL keywords.  While there is debate between indenting using tabs or spaces, spaces are chosen because the width of the indentation will be uniform no matter the environment whereas tabs can vary across environments.  Furthermore, many modern code editors can automatically insert spaces when pressing the TAB key.
 ## <span style="color: green">A. Good</span>
 * Indentation should identify that the code relates to the section it is indented from: for example, the indented lines from a SELECT keyword indicates that the code relates to a SELECT statement
+* Each indentation should consist of four (4) space characters
+* <em>Note: The four bullets in the example are used to illustrate the use of spaces</em>
 <pre>
 SELECT
-<mark>    </mark>  CU.Name
-<mark>    </mark>, CU.StartDate
+<mark>∙∙∙∙</mark>  CU.Name
+<mark>∙∙∙∙</mark>, CU.StartDate
     , CU.PhoneNumber
     , CU.EmailAddress
 
@@ -48,6 +52,21 @@ WHERE
 <mark>CU</mark>.StartDate >= '1/1/2000'
 </pre>
 
+## <span style="color: red">C. Not so Good</span>
+* Two (2) spaces are used instead of four (4) spaces
+* Tab characters are used instead of spaces
+<pre>
+SELECT
+<mark>∙∙</mark>  CU.Name
+<mark>∙∙</mark>, CU.StartDate
+<mark> →</mark>, CU.PhoneNumber
+<mark> →</mark>, CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+<mark> →</mark>CU.StartDate >= '1/1/2000'
+</pre>
 
 # Spaces
 ## <span style="color: green">A. Good</span>
@@ -395,4 +414,165 @@ WHERE
     )
 </pre>
 
+
+# New Lines
+## <span style="color: green">A. Good</span>
+* Insert blank lines in-between SQL keyword sections such as FROM, JOINs, WHERE, GROUP BY, ORDER BY, etc.
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+    , SUM(SA.SaleAmount) AS SaleAmountTotal
+<mark>  </mark>
+FROM AlohaCo.Retail.Sale AS SA
+<mark>  </mark>
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+    ON SA.CustomerId = CU.CustomerId
+<mark>  </mark>
+WHERE
+    CU.StartDate >= '1/1/2000'
+<mark>  </mark>
+GROUP BY
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* No new line between SQL Keyword sections
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+<mark>FROM</mark> AlohaCo.Retail.Customer AS CU
+<mark>LEFT JOIN</mark> AlohaCo.Retail.Customer AS CU
+    ON SA.CustomerId = CU.CustomerId
+<mark>WHERE</mark>
+    CU.StartDate >= '1/1/2000'
+<mark>GROUP BY</mark>
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+</pre>
+
+
+# SELECT
+## <span style="color: green">A. Good</span>
+* The SELECT keyword is always on a separate line
+<pre>
+<mark>SELECT</mark>
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* SELECT and fieldname are on the same line
+<pre>
+SELECT <mark>CU.Name</mark>
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+
+# DISTINCT
+## <span style="color: green">A. Good</span>
+* The DISTINCT keyword should immediately follow and be placed on the same line as the SELECT keyword
+* A line break should immediately follow the DISTINCT keyword
+<pre>
+SELECT <mark>DISTINCT</mark>
+        CU.State
+      , CU.ZipCode
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* Fieldnames should begin on a separate line
+<pre>
+SELECT DISTINCT <mark>CU.State</mark>
+      , CU.ZipCode
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">C. Not so Good</span>
+* DISTINCT is on its own line
+<pre>
+SELECT
+<mark>DISTINCT</mark>
+      CU.State
+    , CU.ZipCode
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+
+# Multiple Field Listing
+## <span style="color: green">A. Good</span>
+* The DISTINCT keyword should immediately follow and be placed on the same line as the SELECT keyword
+* A line break should immediately follow the DISTINCT keyword
+<pre>
+SELECT <mark>DISTINCT</mark>
+        CU.State
+      , CU.ZipCode
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* Fieldnames should begin on a separate line
+<pre>
+SELECT DISTINCT <mark>CU.State</mark>
+      , CU.ZipCode
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">C. Not so Good</span>
+* DISTINCT is on its own line
+<pre>
+SELECT
+<mark>DISTINCT</mark>
+      CU.State
+    , CU.ZipCode
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
 
