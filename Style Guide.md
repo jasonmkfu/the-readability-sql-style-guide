@@ -18,8 +18,9 @@
     CU.StartDate >= '1/1/2000'
 </pre>
 
+
 # Identation
-<span style="color: green"><strong>A. Good</strong></span>
+## <span style="color: green">A. Good</span>
 * Indentation should identify that the code relates to the section it is indented from: for example, the indented lines from a SELECT keyword indicates that the code relates to a SELECT statement
 <pre>
 SELECT
@@ -33,8 +34,9 @@ FROM AlohaCo.Retail.Customer AS CU
 WHERE
    CU.StartDate >= '1/1/2000'
 </pre>
-<span style="color: red"><strong>B. Not so good</strong>
-* Indentation logic is not used for fieldnames in the SELECT and WHERE making code harder to read</span>
+## <span style="color: red">B. Not so Good</span>
+* Indentation logic is not used for fieldnames in the SELECT
+* Indentation logic is not used in the WHERE clause
 <pre>
 SELECT
 <mark>CU</mark>.Name
@@ -46,11 +48,12 @@ WHERE
 <mark>CU</mark>.StartDate >= '1/1/2000'
 </pre>
 
+
 # Spaces
+## <span style="color: green">A. Good</span>
 * Each section of SQL code should NOT have trailing spaces (trailing spaces are normally not visible unless you highlight multiple rows of text or your text editor settings are set to show spaces/tabs)
 * Operators in equations/conditions should have spaces before and after them
 
-<span style="color: green"><strong>A. Good</strong></span>
 <pre>
 SELECT
       CU.Name
@@ -64,9 +67,9 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-<span style="color: red"><strong>B. Not so good</strong></span>
-<br/>
-<span style="color: red">Trailing spaces and no space before and after the “>=” operator</span>
+## <span style="color: red">B. Not so Good</span>
+* Trailing spaces
+* No space before and after the “>=” operator
 <pre>
 SELECT
       CU.Name
@@ -80,10 +83,10 @@ WHERE
     CU.StartDate<mark>>=</mark>'1/1/2000'
 </pre>
 
-# Fully Qualified Table/View Names
-* Use fully qualified names for tables and views: Database.Schema.TableOrViewName.
 
-<span style="color: green"><strong>A. Good</strong></span>
+# Fully Qualified Table/View Names
+## <span style="color: green">A. Good</span>
+* Use fully qualified names for tables and views: Database.Schema.TableOrViewName.
 <pre>
 SELECT
       CU.Name
@@ -96,10 +99,9 @@ FROM <mark>AlohaCo.Retail.Customer</mark> AS CU
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-
-<span style="color: red"><strong>B. Not so good</strong></span>
+## <span style="color: red">B. Not so Good</span>
 <pre>
-USE AlohaCo;
+<mark>USE AlohaCo;</mark>
 
 SELECT
       CU.Name
@@ -115,9 +117,8 @@ WHERE
 
 
 # Comparison Operators
+## <span style="color: green">A. Good</span>
 * While other operators may function in a similar manner, only use the six comparison operators listed below.
-
-<span style="color: green"><strong>A. Good</strong></span>
 <pre>
 =    Equal to
 <>   Not equal to
@@ -127,7 +128,7 @@ WHERE
 >=   Greater than or equal to
 </pre>
 
-<span style="color: red"><strong>B. Not so good</strong></span>
+## <span style="color: red">B. Not so Good</span>
 <pre>
 !=   Not equal to
 !<   Not less than
@@ -135,14 +136,12 @@ WHERE
 </pre>
 
 # Comments
-Comments can help the reader to understand background information or particular portions of complicated SQL.
-
+Comments can help the reader to understand background information or particular portions of complicated SQL.  Comments can also serve as a way to document changes that have occurred over time by documenting changes occurring on a specific date.
+## <span style="color: green">A. Good</span>
 * Do not insert comments that are not useful.
-* Comments can serve as a way to document changes that have occurred over time.  Use block style comments with "/*" and "*/" for 3 or more lines of comments.  For block comments, the beginning and ending comment clauses should be on separate lines with the text comments set to one indentation between the clauses.
+* Use block style comments with "/*" and "*/" for 3 or more lines of comments.  For block comments, the beginning and ending comment clauses should be on separate lines with the text comments set to one indentation between the clauses.
 
 * Use "--" for 1 to 2 lines of comments. A space character should immediately follow the beginning of either a single line or block comment declaration.
-
-<span style="color: green"><strong>A. Good</strong></span>
 <pre>
 <mark>/*</mark>
    Comments that span three or more lines should use block comments
@@ -176,7 +175,7 @@ GROUP BY
     , SA.SubCategoryId
 </pre>
 
-<span style="color: red"><strong>B. Not so good</strong></span>
+## <span style="color: red">B. Not so Good</span>
 <pre>
 <mark>--</mark> Comments that span three or more lines should use block comments
 <mark>--</mark> rather than single-line comments.  Using block comments makes
@@ -207,6 +206,8 @@ GROUP BY
 </pre>
 # Comment Headers (Optional)
 Sometimes it is useful to stylize your comments to indicate different sections of code.  This helps the reader find specific areas of code faster and have a high-level understanding of the different parts of your code.  These stylized comment headers are optional and are provided as a template.
+
+## <span style="color: green">A. Good</span>
 * Use the *** header as a header
     * A 100 character width is used in the example to better fit this document
     * 150 characters is a better real-world width
@@ -215,7 +216,6 @@ Sometimes it is useful to stylize your comments to indicate different sections o
     * 100 characters is a better real-world width
 * Use two indents (8 spaces) for SQL beneath a header or sub-header for improved legibility
 
-<span style="color: green"><strong>A. Good</strong></span>
 <pre><mark>/*</mark>**************************************************************************************************
 <mark>**</mark>  Retail Sales
 <mark>**</mark>*************************************************************************************************/
@@ -262,8 +262,10 @@ Sometimes it is useful to stylize your comments to indicate different sections o
                     , SA.SubCategoryId;
 </pre>
 
-<span style="color: red"><strong>B. Bad</strong>
-<br/>Inconsistent width of header characters, width is too short in the sub-header, and lack of indentation beneath header.
+## <span style="color: red">B. Not so Good</span>
+* Inconsistent width of header characters
+* Width is too short in the sub-header
+* Lack of indentation beneath header.
 </span>
 <pre><mark>/*</mark>**********************
 <mark>**</mark>  Retail Sales
@@ -313,7 +315,7 @@ Sometimes it is useful to stylize your comments to indicate different sections o
 # Parentheses
 * Parentheses must be used when using OR logic
 
-<span style="color: green"><strong>A. Good</strong></span>
+## <span style="color: green">A. Good</span>
 <pre>
 SELECT
       CU.Name
@@ -331,9 +333,8 @@ WHERE
         AND CU.PhoneNumber LIKE '808-%'
     <mark>)</mark>
 </pre>
-<span style="color: red"><strong>B. Not so good</strong>
-<br/>
-No parentheses around OR logic makes the logic ambiguous.
+## <span style="color: red">B. Not so Good</span>
+* No parentheses around OR logic makes the logic ambiguous.
 </span>
 <pre>
 SELECT
@@ -352,9 +353,8 @@ WHERE
 </pre>
 
 # Brackets
+## <span style="color: green">A. Good</span>
 * Do not use square brackets unless there are spaces in the database object names or syntax dependent
-
-<span style="color: green"><strong>A. Good</strong></span>
 <pre>
 SELECT
       CU.Name
@@ -374,9 +374,8 @@ WHERE
     )
 </pre>
 
-<span style="color: red"><strong>B. Not so good</strong>
-<br/>
-Using brackets when not required.
+## <span style="color: red">B. Not so Good</span>
+* Using brackets when not required.
 </span>
 <pre>
 SELECT
