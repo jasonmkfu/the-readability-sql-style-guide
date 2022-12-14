@@ -1,7 +1,6 @@
 # SQL Keywords
-SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should always be in all caps.
-<br/>
 <span style="color: green"><strong>A. Good</strong></span>
+* SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should always be in all caps
 <pre>
 <mark>SELECT</mark>
     CU.Name
@@ -11,8 +10,7 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 </pre>
 
 <span style="color: red"><strong>B. Not so good</strong></span>
-<br/>
-<span style="color: red">Keywords not in all caps</span>
+* Keywords not in all caps
 <br/>
 <pre>
 <mark>select</mark>
@@ -23,9 +21,8 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 </pre>
 
 # Identation
-* Indentation should identify that the code relates to the section it is indented from: for example, the indented lines from a SELECT keyword indicates that the code relates to a SELECT statement.
-
 <span style="color: green"><strong>A. Good</strong></span>
+* Indentation should identify that the code relates to the section it is indented from: for example, the indented lines from a SELECT keyword indicates that the code relates to a SELECT statement
 <pre>
 SELECT
 <mark>    </mark>  CU.Name
@@ -38,11 +35,10 @@ FROM AlohaCo.Retail.Customer AS CU
 WHERE
    CU.StartDate >= '1/1/2000'
 </pre>
-<span style="color: red"><strong>B. Not so good</strong></span>
-<br/>
-<span style="color: red">Indentation logic is not used making code harder to read</span>
+<span style="color: red"><strong>B. Not so good</strong>
+* Indentation logic is not used for fieldnames in the SELECT and WHERE making code harder to read</span>
 <pre>
-<mark>SE</mark>LECT
+SELECT
 <mark>CU</mark>.Name
 <mark>,</mark>CU.StartDate
 <mark>,</mark>CU.PhoneNumber
