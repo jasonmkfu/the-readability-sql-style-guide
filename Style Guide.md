@@ -1,3 +1,5 @@
+Consequently, the style guide defers to improved legibility and comprehension over space conservation.
+
 # SQL Keywords
 Capitalizing SQL keywords allows for easier comprehension by the reader by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in comprehension by coloring SQL keywords.
 ## <span style="color: green">A. Good</span>
@@ -25,7 +27,7 @@ Indenting is common practice across all programming languages.  In SQL, it assis
 ## <span style="color: green">A. Good</span>
 * Indentation should identify that the code relates to the section it is indented from: for example, the indented lines from a SELECT keyword indicates that the code relates to a SELECT statement
 * Each indentation should consist of four (4) space characters
-* <em>Note: The four bullets in the example are used to illustrate the use of spaces</em>
+* <em>Note: The bullets in the examples below are used to illustrate the use of spaces and should not be included in the SQL</em>
 <pre>
 SELECT
 <mark>∙∙∙∙</mark>  CU.Name
@@ -69,9 +71,10 @@ WHERE
 </pre>
 
 # Spaces
+Eliminating trailing spaces is good practice to maintain clean code.  Spaces preceding and following logical operations allows for a clear understanding of what is being compared to the left and the right of the operator.
 ## <span style="color: green">A. Good</span>
 * Each section of SQL code should NOT have trailing spaces (trailing spaces are normally not visible unless you highlight multiple rows of text or your text editor settings are set to show spaces/tabs)
-* Operators in equations/conditions should have spaces before and after them
+* Logical perators in equations/conditions should have spaces before and after them
 
 <pre>
 SELECT
@@ -89,14 +92,15 @@ WHERE
 ## <span style="color: red">B. Not so Good</span>
 * Trailing spaces
 * No space before and after the “>=” operator
+* <em>Note: The bullets in the examples below are used to illustrate the use of spaces and should not be included in the SQL</em>
 <pre>
 SELECT
       CU.Name
     , CU.StartDate
     , CU.PhoneNumber
-    , CU.EmailAddress<mark>    </mark>
+    , CU.EmailAddress<mark>∙∙∙∙∙</mark>
 
-FROM AlohaCo.Retail.Customer AS CU<mark> </mark>
+FROM AlohaCo.Retail.Customer AS CU<mark>∙∙</mark>
 
 WHERE
     CU.StartDate<mark>>=</mark>'1/1/2000'
@@ -332,9 +336,9 @@ Sometimes it is useful to stylize your comments to indicate different sections o
     , SA.SubCategoryId;
 </pre>
 # Parentheses
-* Parentheses must be used when using OR logic
-
+Similar to evaluating mathematical equations where the order of operations is applied to determine the order to evaluate different portions of the equation, when using multiple, different logical operators, it is important to use parentheses to define the order in which the SQL engine evaluates logical operator comparisons.
 ## <span style="color: green">A. Good</span>
+* Parentheses must be used when using OR logic
 <pre>
 SELECT
       CU.Name
@@ -372,6 +376,7 @@ WHERE
 </pre>
 
 # Brackets
+Included brackets when they are not needed adds additional visual clutter that decreases legibility.
 ## <span style="color: green">A. Good</span>
 * Do not use square brackets unless there are spaces in the database object names or syntax dependent
 <pre>
@@ -416,6 +421,7 @@ WHERE
 
 
 # New Lines
+This is a debatable style requirement, especially for simple queries with only a few fields or tables.  However, the majority of queries will not be simple.  By inserting new lines in-between SQL keyword sections, it assists legibility by using white space to distinguish different sections with the SQL code.
 ## <span style="color: green">A. Good</span>
 * Insert blank lines in-between SQL keyword sections such as FROM, JOINs, WHERE, GROUP BY, ORDER BY, etc.
 <pre>
@@ -463,6 +469,7 @@ SELECT
 
 
 # SELECT
+Placing the SELECT keyword on its own line helps highlight the beginning of a SELECT statement which helps legibility.
 ## <span style="color: green">A. Good</span>
 * The SELECT keyword is always on a separate line
 <pre>
@@ -494,6 +501,10 @@ WHERE
 
 
 # DISTINCT
+Similar to the reasoning for the SELECT keyword to exist on its own line, the DISTINCT keyword affects the behavior of the SELECT, so including it on the same line as its related SELECT keep related keywords together.
+| :warning: WARNING          |
+|:---------------------------|
+| The use of the DISTINCT keyword should be used sparingly as it can often be an expensive query.|
 ## <span style="color: green">A. Good</span>
 * The DISTINCT keyword should immediately follow and be placed on the same line as the SELECT keyword
 * A line break should immediately follow the DISTINCT keyword
