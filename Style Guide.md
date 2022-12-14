@@ -3,11 +3,11 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 <br/>
 <span style="color: green"><strong>A. Good</strong></span>
 <pre>
-1    <mark>SELECT</mark>
-2        TA.FieldOne
-3    <mark>FROM</mark> Database.Schema.TableAlpha <mark>AS</mark> TA
-4    <mark>WHERE</mark>
-5        TA.DateColumn >= '1/1/2000'
+<mark>SELECT</mark>
+    CU.Name
+<mark>FROM</mark> AlohaCo.Retail.Customer <mark>AS</mark> CU
+<mark>WHERE</mark>
+    CU.StartDate >= '1/1/2000'
 </pre>
 
 <span style="color: red"><strong>B. Not so good</strong></span>
@@ -15,11 +15,11 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 <span style="color: red">Keywords not in all caps</span>
 <br/>
 <pre>
-6    <mark>select</mark>
-7        TA.FieldOne
-8    <mark>From</mark> Database.Schema.TableAlpha <mark>as</mark> TA
-9    <mark>WhErE</mark>
-10        TA.DateColumn >= '1/1/2000'
+<mark>select</mark>
+    CU.Name
+<mark>From</mark> AlohaCo.Retail.Customer <mark>as</mark> CU
+<mark>WhErE</mark>
+    CU.StartDate >= '1/1/2000'
 </pre>
 
 # Identation
@@ -27,27 +27,29 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 
 <span style="color: green"><strong>A. Good</strong></span>
 <pre>
-1    SELECT
-2    <mark>    </mark>  TA.FieldOne
-3    <mark>    </mark>, TA.FieldTwo
-4        , TA.FieldThree
-5        , TA.FieldFour
-6    FROM Database.Schema.TableAlpha AS TA
-7    WHERE
-8       TA.DateColumn >= '1/1/2000'
+SELECT
+<mark>    </mark>  CU.Name
+<mark>    </mark>, CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+   CU.StartDate >= '1/1/2000'
 </pre>
 <span style="color: red"><strong>B. Not so good</strong></span>
 <br/>
 <span style="color: red">Indentation logic is not used making code harder to read</span>
 <pre>
-8     <mark>SE</mark>LECT
-9     <mark>TA</mark>.FieldOne
-10    <mark>,</mark>TA.FieldTwo
-11    <mark>,</mark>TA.FieldThree
-12    ,TA.FieldFour
-13    FROM Database.Schema.TableAlpha AS TA
-14    WHERE
-15    <mark>TA</mark>.DateColumn >= '1/1/2000'
+<mark>SE</mark>LECT
+<mark>CU</mark>.Name
+<mark>,</mark>CU.StartDate
+<mark>,</mark>CU.PhoneNumber
+,CU.EmailAddress
+FROM AlohaCo.Retail.Customer AS CU
+WHERE
+<mark>CU</mark>.StartDate >= '1/1/2000'
 </pre>
 
 # Spaces
@@ -56,32 +58,32 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 
 <span style="color: green"><strong>A. Good</strong></span>
 <pre>
-1    SELECT
-2          TA.FieldOne
-3        , TA.FieldTwo
-4        , TA.FieldThree
-5        , TA.FieldFour
-6
-7    FROM Database.Schema.TableAlpha AS TA
-8
-9    WHERE
-10        TA.DateColumn >= '1/1/2000'
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
 </pre>
 
 <span style="color: red"><strong>B. Not so good</strong></span>
 <br/>
 <span style="color: red">Trailing spaces and no space before and after the “>=” operator</span>
 <pre>
-1    SELECT
-2          TA.FieldOne
-3        , TA.FieldTwo
-4        , TA.FieldThree
-5        , TA.FieldFour<mark>    </mark>
-6
-7    FROM Database.Schema.TableAlpha AS TA<mark> </mark>
-8
-9    WHERE
-10        TA.DateColumn<mark>>=</mark>'1/1/2000'
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress<mark>    </mark>
+
+FROM AlohaCo.Retail.Customer AS CU<mark> </mark>
+
+WHERE
+    CU.StartDate<mark>>=</mark>'1/1/2000'
 </pre>
 
 # Fully Qualified Table/View Names
@@ -89,32 +91,32 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 
 <span style="color: green"><strong>A. Good</strong></span>
 <pre>
-1    SELECT
-2          TA.FieldOne
-3        , TA.FieldTwo
-4        , TA.FieldThree
-5        , TA.FieldFour
-6
-7    FROM <mark>Database.Schema.TableAlpha</mark> AS TA
-8
-9    WHERE
-10        TA.DateColumn >= '1/1/2000'
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM <mark>AlohaCo.Retail.Customer</mark> AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
 </pre>
 
 <span style="color: red"><strong>B. Not so good</strong></span>
 <pre>
-1    USE Database;
-2
-3    SELECT
-4          TA.FieldOne
-5        , TA.FieldTwo
-6        , TA.FieldThree
-7        , TA.FieldFour
-8
-9    FROM <mark>Schema.TableAlpha</mark> AS TA
-10
-11   WHERE
-12       TA.DateColumn >= '1/1/2000'
+USE AlohaCo;
+
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM <mark>Retail.Customer</mark> AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
 </pre>
 
 
@@ -123,19 +125,19 @@ SQL Keywords such as SELECT, FROM, WHERE, INNER JOIN, LEFT JOIN, ON, etc. should
 
 <span style="color: green"><strong>A. Good</strong></span>
 <pre>
-1    =    Equal to
-2    <>   Not equal to
-3    <    Less than
-4    <=   Less than or equal to
-5    >    Greater than
-6    >=   Greater than or equal to
+=    Equal to
+<>   Not equal to
+<    Less than
+<=   Less than or equal to
+>    Greater than
+>=   Greater than or equal to
 </pre>
 
 <span style="color: red"><strong>B. Not so good</strong></span>
 <pre>
-7    !=   Not equal to
-8    !<   Not less than
-9    !>   Not greater than
+!=   Not equal to
+!<   Not less than
+!>   Not greater than
 </pre>
 
 # Comments
@@ -148,70 +150,256 @@ Comments can help the reader to understand background information or particular 
 
 <span style="color: green"><strong>A. Good</strong></span>
 <pre>
-1    <mark>/*</mark>
-2       Comments that span three or more lines should use block comments
-3       rather than single-line comments.  Using block comments makes
-4       reading long comments easier to read than using single-line
-5       comments.
-6    <mark>*/</mark>
-7
-8    SELECT
-9          TA.FieldOne
-10       , TA.FieldTwo
-11       , TA.FieldThree
-12       , TA.FieldFour
-13
-14       <mark>--</mark> This is an example of usign single-line comments to provide
-15       <mark>--</mark> further information about the SUM aggregation below
-16       , SUM(TA.FieldFive) AS FieldFiveSum
-17
-18   FROM Database.Schema.TableAlpha AS TA
-19
-20   WHERE
-21        TA.DateColumn >= '1/1/2000'
-22        AND TA.FieldFour IN (
-23              1 <mark>-- 1: Alpha</mark>
-24            , 2 <mark>-- 2: Beta</mark>
-25            , 3 <mark>-- 3: Charlie</mark>
-26        )
-27
-28   GROUP BY
-29         TA.FieldOne
-30       , TA.FieldTwo
-31       , TA.FieldThree
-32       , TA.FieldFour
+<mark>/*</mark>
+   Comments that span three or more lines should use block comments
+   rather than single-line comments.  Using block comments makes
+   reading long comments easier to read than using single-line
+   comments.
+<mark>*/</mark>
+
+SELECT
+      SA.StoreId
+    , SA.CategoryId
+    , SA.SubCategoryId
+
+    <mark>--</mark> This is an example of usign single-line comments to provide
+    <mark>--</mark> further information about the SUM aggregation below
+    , SUM(SA.SaleAmount) AS SaleAmountTotal
+
+FROM AlohaCo.Retail.Sale AS SA
+
+WHERE
+     SA.SaleDate >= '1/1/2000'
+     AND SA.CategoryId IN (
+           1 <mark>-- </mark>Shirts
+         , 2 <mark>-- </mark>Shorts
+         , 3 <mark>-- </mark>Hats
+     )
+
+GROUP BY
+      SA.StoreId
+    , SA.CategoryId
+    , SA.SubCategoryId
 </pre>
 
 <span style="color: red"><strong>B. Not so good</strong></span>
 <pre>
-1    <mark>--</mark> Comments that span three or more lines should use block comments
-2    <mark>--</mark> rather than single-line comments.  Using block comments makes
-3    <mark>--</mark> reading long comments easier to read than using single-line
-4    <mark>--</mark> comments.
-6
-7    SELECT
-8          TA.FieldOne
-9        , TA.FieldTwo
-10       , TA.FieldThree
-11       , TA.FieldFour <mark>-- This is FieldFour</mark>
-12
-13       <mark>--T</mark>his is an example of usign single-line comments to provide
-14       -- further information about the SUM aggregation below
-15       , SUM(TA.FieldFive) AS FieldFiveSum
-16
-17   FROM Database.Schema.TableAlpha AS TA
-18
-19   WHERE
-20        TA.DateColumn >= '1/1/2000'
-21        AND TA.FieldFour IN (
-22              1 <mark>--1</mark>: Alpha
-23            , 2 <mark>--2</mark>: Beta
-24            , 3 <mark>--3</mark>: Charlie
-25        )
-26
-27   GROUP BY
-28         TA.FieldOne
-29       , TA.FieldTwo
-30       , TA.FieldThree
-31       , TA.FieldFour
+<mark>--</mark> Comments that span three or more lines should use block comments
+<mark>--</mark> rather than single-line comments.  Using block comments makes
+<mark>--</mark> reading long comments easier to read than using single-line
+SELECT
+      SA.StoreId
+    , SA.CategoryId
+    , SA.SubCategoryId <mark>-- This is SubCategoryId</mark>
+
+    <mark>--T</mark>his is an example of using single-line comments to provide
+    -- further information about the SUM aggregation below
+    , SUM(SA.SaleAmount) AS SaleAmountTotal
+
+FROM AlohaCo.Retail.Sale AS SA
+
+WHERE
+     SA.SaleDate >= '1/1/2000'
+     AND SA.CategoryId IN (
+           1 <mark>--S</mark>hirts
+         , 2 <mark>--S</mark>horts
+         , 3 <mark>--H</mark>ats
+     )
+
+GROUP BY
+      SA.StoreId
+    , SA.CategoryId
+    , SA.SubCategoryId
 </pre>
+# Comment Headers (Optional)
+Sometimes it is useful to stylize your comments to indicate different sections of code.  This helps the reader find specific areas of code faster and have a high-level understanding of the different parts of your code.  These stylized comment headers are optional and are provided as a template.
+* Use the *** header as a header
+    * A 100 character width is used in the example to better fit this document
+    * 150 characters is a better real-world width
+* Use the --- header as a sub-header
+    * A 50 character width is used in the example to better fit this document
+    * 100 characters is a better real-world width
+* Use two indents (8 spaces) for SQL beneath a header or sub-header for improved legibility
+
+<span style="color: green"><strong>A. Good</strong></span>
+<pre><mark>/*</mark>**************************************************************************************************
+<mark>**</mark>  Retail Sales
+<mark>**</mark>*************************************************************************************************/
+
+        <mark>--</mark>------------------------------------------------
+        <mark>--</mark>  Customer Information
+        <mark>--</mark>------------------------------------------------
+                SELECT
+                      CU.Name
+                    , CU.StartDate
+                    , CU.PhoneNumber
+                    , CU.EmailAddress
+
+                FROM AlohaCo.Retail.Customer AS CU
+
+                WHERE
+                    CU.StartDate >= '1/1/2000';
+
+        <mark>--</mark>------------------------------------------------
+        <mark>--</mark>  Shirts, Shorts, and Hats
+        <mark>--</mark>------------------------------------------------
+                SELECT
+                      SA.StoreId
+                    , SA.CategoryId
+                    , SA.SubCategoryId
+
+                    -- This is an example of using single-line comments to provide
+                    -- further information about the SUM aggregation below
+                    , SUM(SA.SaleAmount) AS SaleAmountTotal
+
+                FROM AlohaCo.Retail.Sale AS SA
+
+                WHERE
+                    SA.SaleDate >= '1/1/2000'
+                    AND SA.CategoryId IN (
+                          1 -- Shirts
+                        , 2 -- Shorts
+                        , 3 -- Hats
+                    )
+
+                GROUP BY
+                      SA.StoreId
+                    , SA.CategoryId
+                    , SA.SubCategoryId;
+</pre>
+
+<span style="color: red"><strong>B. Bad</strong>
+<br/>Inconsistent width of header characters, width is too short in the sub-header, and lack of indentation beneath header.
+</span>
+<pre><mark>/*</mark>**********************
+<mark>**</mark>  Retail Sales
+<mark>**</mark>********************<mark>*******</mark>**/
+
+        ----------<mark>  </mark>
+        --  Customer Information
+        ----------<mark>  </mark>
+                SELECT
+                    CU.Name
+                    , CU.StartDate
+                    , CU.PhoneNumber
+                    , CU.EmailAddress
+
+                FROM AlohaCo.Retail.Customer AS CU
+
+                WHERE
+                    CU.StartDate >= '1/1/2000';
+
+<mark>--</mark>------------------------------------------------
+<mark>--</mark>  Shirts, Shorts, and Hats
+<mark>--</mark>------------------------------------------------
+<mark>SE</mark>LECT
+        SA.StoreId
+    , SA.CategoryId
+    , SA.SubCategoryId
+
+    -- This is an example of using single-line comments to provide
+    -- further information about the SUM aggregation below
+    , SUM(SA.SaleAmount) AS SaleAmountTotal
+
+<mark>FR</mark>OM AlohaCo.Retail.Sale AS SA
+
+<mark>WH</mark>ERE
+    SA.SaleDate >= '1/1/2000'
+    AND SA.CategoryId IN (
+            1 -- Shirts
+        , 2 -- Shorts
+        , 3 -- Hats
+    )
+
+<mark>GR</mark>OUP BY
+        SA.StoreId
+    , SA.CategoryId
+    , SA.SubCategoryId;
+</pre>
+# Parentheses
+* Parentheses must be used when using OR logic
+
+<span style="color: green"><strong>A. Good</strong></span>
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.State = 'HI'
+    <mark>OR (</mark>
+        CU.State IS NULL
+        AND CU.PhoneNumber LIKE '808-%'
+    <mark>)</mark>
+</pre>
+<span style="color: red"><strong>B. Not so good</strong>
+<br/>
+No parentheses around OR logic makes the logic ambiguous.
+</span>
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.State = 'HI'
+    <mark>OR</mark> CU.State IS NULL
+    AND CU.PhoneNumber LIKE '808-%'
+</pre>
+
+# Brackets
+* Do not use square brackets unless there are spaces in the database object names or syntax dependent
+
+<span style="color: green"><strong>A. Good</strong></span>
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+    , CU.<mark>[</mark>Birth Date<mark>]</mark>
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.State = 'HI'
+    OR (
+        CU.State IS NULL
+        AND CU.PhoneNumber LIKE '808-%'
+    )
+</pre>
+
+<span style="color: red"><strong>B. Not so good</strong>
+<br/>
+Using brackets when not required.
+</span>
+<pre>
+SELECT
+      CU.<mark>[</mark>Name<mark>]</mark>
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM <mark>[</mark>AlohaCo<mark>]</mark>.<mark>[</mark>Retail<mark>]</mark>.<mark>[</mark>Customer<mark>]</mark> AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.State = 'HI'
+    OR (
+        CU.State IS NULL
+        AND CU.PhoneNumber LIKE '808-%'
+    )
+</pre>
+
+
