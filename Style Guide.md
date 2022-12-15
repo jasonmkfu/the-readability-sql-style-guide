@@ -331,7 +331,7 @@ Sometimes it is useful to stylize your comments to indicate different sections o
     )
 
 <mark>GR</mark>OUP BY
-        SA.StoreId
+      SA.StoreId
     , SA.CategoryId
     , SA.SubCategoryId;
 </pre>
@@ -547,13 +547,18 @@ WHERE
 
 
 # Multiple Field Listing
+There is varying opinion regarding leading or trailing commas.  Leading commas are recommended because it is easier to see when adding new fields that you are missing a comma because they are all lined up.  Similarly, opinion on first-field alignment also differs, however, the style guide opts for first field alignment as it makes easier to read the list fields.
 ## <span style="color: green">A. Good</span>
-* The DISTINCT keyword should immediately follow and be placed on the same line as the SELECT keyword
-* A line break should immediately follow the DISTINCT keyword
+* Each field should be on its own line with one indent to the right of the clause it is relating to (SELECT, WHERE, GROUP BY, etc.)
+* Each subsequent field should utilize leading commas
+* One (1) space should immediately follow the comma followed by the field name
+* <em>Note: The bullets in the examples below are used to illustrate the use of spaces and should not be included in the SQL</em>
 <pre>
-SELECT <mark>DISTINCT</mark>
-        CU.State
-      , CU.ZipCode
+SELECT
+    <mark>∙∙</mark>CU.Name
+    <mark>, </mark>CU.StartDate
+    <mark>, </mark>CU.PhoneNumber
+    <mark>, </mark>CU.EmailAddress
 
 FROM AlohaCo.Retail.Customer AS CU
 
@@ -562,10 +567,10 @@ WHERE
 </pre>
 
 ## <span style="color: red">B. Not so Good</span>
-* Fieldnames should begin on a separate line
+* Field names not on separate lines
 <pre>
-SELECT DISTINCT <mark>CU.State</mark>
-      , CU.ZipCode
+SELECT
+    CU.Name<mark>, </mark>CU.StartDate<mark>, </mark>CU.PhoneNumber<mark>,</mark> CU.EmailAddress
 
 FROM AlohaCo.Retail.Customer AS CU
 
@@ -574,12 +579,13 @@ WHERE
 </pre>
 
 ## <span style="color: red">C. Not so Good</span>
-* DISTINCT is on its own line
+* Trailing commas instead of leading commas
 <pre>
 SELECT
-<mark>DISTINCT</mark>
-      CU.State
-    , CU.ZipCode
+    CU.Name
+    CU.StartDate<mark>,</mark>
+    CU.PhoneNumber<mark>,</mark>
+    CU.EmailAddress<mark>,</mark>
 
 FROM AlohaCo.Retail.Customer AS CU
 
@@ -587,3 +593,273 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
+## <span style="color: red">D. Not so Good</span>
+* No space following each comma
+* No first-field alignment
+<pre>
+SELECT
+    <mark>CU.Name</mark>
+    <mark>,C</mark>U.StartDate
+    <mark>,C</mark>U.PhoneNumber
+    <mark>,C</mark>U.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">E. Not so Good</span>
+* Columns not indented
+<pre>
+SELECT
+<mark>  </mark>CU.Name
+<mark>, </mark>CU.StartDate
+<mark>, </mark>CU.PhoneNumber
+<mark>, </mark>CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+
+# FROM
+Because there is only ever one table/view that follows the FROM keyword, the table/view is placed on the same line rather than on a separate line.
+## <span style="color: green">A. Good</span>
+* The FROM keyword should include the table name on the same line.  It should NOT be placed on its own line.
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+<mark>FROM Aloha</mark>Co.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* The FROM keyword and the table/view are on separate lines
+<pre>
+SELECT CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+<mark>FROM
+    Aloha</mark>Co.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+
+# WHERE
+The WHERE clause can include one or many predicates.  While it may make sense for instance of one predicate to exist on the same line as the WHERE keyword, because many predicates also can exist, the style guide opts for a consistent rule in the separate line approach.  First-field alignment should not be used because of the varying amounts of indentation that would be needed depending on the use of AND/OR.
+## <span style="color: green">A. Good</span>
+* The WHERE clause should exist on its own line
+* Each logical condition in the WHERE clause should be placed on its own line with appropriate indentation
+* Do not apply first-field alignment
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+<mark>    </mark>CU.StartDate >= '1/1/2000'
+<mark>    </mark>AND CU.State = 'HI'
+<mark>    </mark>OR (
+<mark>    </mark>    CU.State IS NULL
+<mark>    </mark>    AND CU.PhoneNumber LIKE '808-%'
+<mark>    </mark>)
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* Predicate should be on a separate line from the WHERE keyword
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE<mark> </mark>CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">C. Not so Good</span>
+* Predicates are not on separate lines
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000' <mark>AND</mark> CU.State = 'HI'
+    OR (
+        CU.State IS NULL
+        AND CU.PhoneNumber LIKE '808-%'
+    )
+</pre>
+
+## <span style="color: red">D. Not so Good</span>
+* Do not apply first-field alignment
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    <mark>    </mark>CU.StartDate >= '1/1/2000'
+    AND CU.State = 'HI'
+    OR (
+        CU.State IS NULL
+        AND CU.PhoneNumber LIKE '808-%'
+    )
+</pre>
+
+## <span style="color: red">E. Not so Good</span>
+* No indentation of predicates in relation to the WHERE keyword
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+<mark>C</mark>U.StartDate >= '1/1/2000'
+<mark>A</mark>ND CU.State = 'HI'
+<mark>O</mark>R (
+<mark> </mark>   CU.State IS NULL
+<mark> </mark>   AND CU.PhoneNumber LIKE '808-%'
+<mark>)</mark>
+</pre>
+
+
+
+
+
+# IN
+Values in an IN statement should be treated similar to the Multiple Field Listing style with the addition of adding the name equivalent for values that represent an ID or code.  Including the "name" equivalent helps the reader understand what the list represents without having to write another query to determine the "names" of the listed values.
+## <span style="color: green">A. Good</span>
+* Each field should be on its own line with one indent to the right of the opening parentheses
+* Each subsequent field should utilize leading commas
+* One (1) space should immediately follow the comma followed by the field name
+* For values representing IDs or codes, the "name" equivalent should be included
+* The name equivalent should be aligned for all values and begin one space after the longest listed value
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.CustomerLoyaltyCardLevel IN (
+    <mark>    </mark>  1  <mark> </mark>-- Bronze
+    <mark>    </mark>, 2  <mark> </mark>-- Silver
+    <mark>    </mark>, 3  <mark> </mark>-- Gold
+    <mark>    </mark>, 202<mark> </mark>-- Platinum
+    )
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* Individual values are not on separate lines
+* No "name" equivalents included
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.CustomerLoyaltyCardLevel IN (
+        <mark>1, 2, 3, 202</mark>
+    )
+</pre>
+
+## <span style="color: red">C. Not so Good</span>
+* List of values does not start on a separate line
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.CustomerLoyaltyCardLevel IN (<mark>1</mark>, 2, 3, 202)
+</pre>
+
+## <span style="color: red">D. Not so Good</span>
+* "Name" equivalents are not aligned to one space after the right-most value
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.CustomerLoyaltyCardLevel IN (
+          1<mark> </mark>-- Bronze
+        , 2<mark> </mark>-- Silver
+        , 3<mark> </mark>-- Gold
+        , 202 -- Platinum
+    )
+</pre>
+
+## <span style="color: red">E. Not so Good</span>
+* List of values are not indented from its parent clause
+* Commas should precede each value followed by a space and not after each value
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.CustomerLoyaltyCardLevel IN (
+<mark>    </mark>1<mark>,</mark>   -- Bronze
+<mark>    </mark>2<mark>,</mark>   -- Silver
+<mark>    </mark>3<mark>,</mark>   -- Gold
+<mark>    </mark>202 -- Platinum
+    )
+</pre>
