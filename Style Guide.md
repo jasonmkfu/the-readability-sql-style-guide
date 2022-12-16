@@ -123,9 +123,10 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 ## <span style="color: red">B. Not so Good</span>
+
 <pre>
 <mark>USE AlohaCo;</mark>
-
+* Employes the USE keyword to define the database context instead of using the fully qualified name
 SELECT
       CU.Name
     , CU.StartDate
@@ -199,6 +200,9 @@ GROUP BY
 </pre>
 
 ## <span style="color: red">B. Not so Good</span>
+* No usage of block comments for comments that span three or more lines
+* No space following single line comments
+
 <pre>
 <mark>--</mark> Comments that span three or more lines should use block comments
 <mark>--</mark> rather than single-line comments.  Using block comments makes
@@ -209,7 +213,7 @@ SELECT
     , SA.SubCategoryId <mark>-- This is SubCategoryId</mark>
 
     <mark>--T</mark>his is an example of using single-line comments to provide
-    -- further information about the SUM aggregation below
+    <mar>--f</mark>urther information about the SUM aggregation below
     , SUM(SA.SaleAmount) AS SaleAmountTotal
 
 FROM AlohaCo.Retail.Sale AS SA
@@ -659,7 +663,7 @@ WHERE
 
 
 # WHERE
-The WHERE clause can include one or many predicates.  While it may make sense for instance of one predicate to exist on the same line as the WHERE keyword, because many predicates also can exist, the style guide opts for a consistent rule in the separate line approach.  First-field alignment should not be used because of the varying amounts of indentation that would be needed depending on the use of AND/OR.
+The WHERE clause can include one or many predicates.  While it may make sense when there is only one predicate that it exist on the same line as the WHERE keyword, because many predicates can also exist, the style guide opts for a consistent rule for all cases and requires the separate lines approach.  First-field alignment should not be used because of the varying amounts of indentation that would be needed depending on the use of AND/OR.
 ## <span style="color: green">A. Good</span>
 * The WHERE clause should exist on its own line
 * Each logical condition in the WHERE clause should be placed on its own line with appropriate indentation
@@ -754,9 +758,6 @@ WHERE
 <mark> </mark>   AND CU.PhoneNumber LIKE '808-%'
 <mark>)</mark>
 </pre>
-
-
-
 
 
 # IN
@@ -862,4 +863,70 @@ WHERE
 <mark>    </mark>3<mark>,</mark>   -- Gold
 <mark>    </mark>202 -- Platinum
     )
+</pre>
+
+
+
+
+# OVER (Window Function)
+Window functions can add additional complexity to the SELECT statement.  The window function style focuses on improving legibility of the window function code and visually separating the window block from surrounding SELECT objects.
+## <span style="color: green">A. Good</span>
+* The PARTITION BY keyword immediately follows the OVER clause on its own line and indented
+* Field names in the PARTITION BY or ORDER BY clause should be indented an additional time from the Window function
+* Field names in the PARTITION BY or ORDER BY clause should be on separate line with first-field alignment applied
+* The closing parentheses should be on a separate line along with an alias
+* The closing parentheses should be indented two spaces to align with the Window Function
+* Due to the complexity of window functions, blank lines should both precede and follow each window function
+
+<pre>
+SELECT
+      SA.StoreId
+    , SA.SaleDate
+    , SA.CustomerId
+    , SA.TransactionId
+    , SA.SaleAmount
+
+    , ROW_NUMBER() OVER <mark>(</mark>
+    <mark>∙∙∙∙</mark>PARTITION BY
+            <mark>∙∙</mark>SA.CustomerId
+            , SA.StoreId
+            , HA.FinancialClassDSC
+    <mark>∙∙∙∙</mark>ORDER BY
+              SA.SaleDate ASC
+            , SA.TransactionId ASC
+    <mark>∙∙</mark>) AS SaleRowNumber
+
+FROM AlohaCo.Retail.Sale AS SA
+
+WHERE
+    SA.SaleDate >= '1/1/2000'
+    AND SA.SaleDate < '1/1/2001'
+</pre>
+
+## <span style="color: red">B. Not so Good</span>
+* No carriage returns before and after the window function code
+* PARTITION BY not on a separate line
+* PARTITION BY field names not on separate lines line
+* Opening parenthesis not on same line as the OVER keyword
+* First-field alignment not applied
+* PARTITION BY and ORDER BY not indented
+* Closing parenthesis not on its own line
+<pre>
+SELECT
+      SA.StoreId
+    , SA.SaleDate
+    , SA.CustomerId
+    , SA.TransactionId
+    , SA.SaleAmount
+    , ROW_NUMBER() OVER
+    <mark>(</mark>
+    <mark>P</mark>ARTITION BY<mark> </mark>SA.CustomerId<mark>, </mark>SA.StoreId<mark>, </mark>HA.FinancialClassDSC
+    <mark>O</mark>RDER BY
+        <mark>S</mark>A.SaleDate ASC
+        , SA.TransactionId ASC<mark>)</mark> AS SaleRowNumber
+FROM AlohaCo.Retail.Sale AS SA
+
+WHERE
+    SA.SaleDate >= '1/1/2000'
+    AND SA.SaleDate < '1/1/2001'
 </pre>
