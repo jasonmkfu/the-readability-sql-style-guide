@@ -459,7 +459,8 @@ SELECT
     , CU.StartDate
     , CU.PhoneNumber
     , CU.EmailAddress
-<mark>FROM</mark> AlohaCo.Retail.Customer AS CU
+    , SUM(SA.SaleAmount) AS SaleAmountTotal
+<mark>FROM</mark> AlohaCo.Retail.Sale AS SA
 <mark>LEFT JOIN</mark> AlohaCo.Retail.Customer AS CU
     ON SA.CustomerId = CU.CustomerId
 <mark>WHERE</mark>
@@ -506,7 +507,7 @@ WHERE
 
 # DISTINCT
 Similar to the reasoning for the SELECT keyword to exist on its own line, the DISTINCT keyword affects the behavior of the SELECT, so including it on the same line as its related SELECT keep related keywords together.
-| :warning: WARNING          |
+| ★ WARNING ★         |
 |:---------------------------|
 | The use of the DISTINCT keyword should be used sparingly as it can often be an expensive query.|
 ## <span style="color: green">A. Good</span>
@@ -929,4 +930,121 @@ FROM AlohaCo.Retail.Sale AS SA
 WHERE
     SA.SaleDate >= '1/1/2000'
     AND SA.SaleDate < '1/1/2001'
+</pre>
+
+
+
+
+# Aliases
+•	Aliases should be applied to fields, CASE statements, multiple tables, and sub-queries.
+•	All aliases should use the AS keyword. Do not use the “=” sign in place of the AS keyword.
+•	Do not use an alias with a space in it.
+•	Do not use the table alias convention of A, B, C, etc. or some other ordinal structure
+| ★ P-SQL Exception ★         |
+|:---------------------------|
+| In P-SQL you cannot use the AS keyword on tables.  In such cases, simply do not use the AS keyword, but still utilize the AS keyword for fieldnames.|
+
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress <mark>AS</mark> Email
+    , CASE
+          WHEN
+              SA.CategoryId IN (
+                    1 -- Shirts
+                  , 4 -- Long-Sleeve Shirts
+                  , 4 -- Tank Tops
+              )
+              THEN 1
+          ELSE
+              0
+      END <mark>AS</mark> ShirtFlag
+
+FROM AlohaCo.Retail.Sale <mark>AS</mark> SA
+
+LEFT JOIN AlohaCo.Retail.Customer <mark>AS</mark> CU
+    ON SA.CustomerId = CU.CustomerId
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+
+GROUP BY
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+</pre>
+## <span style="color: red">B. Not so Good</span>
+* Do not use the equal (=) sign to assingn an alias, use "AS"
+* Do not include spaces in the alias name
+* Do not omit the "AS" for table/view aliases
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , Email <mark>=</mark> CU.EmailAddress
+    , ShirtFlag <mark>=</mark>
+          CASE
+              WHEN
+                  "S T".CategoryId IN (
+                        1 -- Shirts
+                      , 4 -- Long-Sleeve Shirts
+                      , 4 -- Tank Tops
+                  )
+                  THEN 1
+              ELSE
+                  0
+          END
+
+FROM AlohaCo.Retail.Sale AS <mark>"S T"</mark>
+
+LEFT JOIN AlohaCo.Retail.Customer<mark> </mark>CU
+    ON "S T".CustomerId = CU.CustomerId
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+
+GROUP BY
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+</pre>
+
+## <span style="color: red">C. Not so Good</span>
+* Do not use ordinal table aliasing
+<pre>
+SELECT
+      A.Name
+    , A.StartDate
+    , A.PhoneNumber
+    , A.EmailAddress AS Email
+    , CASE
+          WHEN
+              B.CategoryId IN (
+                    1 -- Shirts
+                  , 4 -- Long-Sleeve Shirts
+                  , 4 -- Tank Tops
+              )
+              THEN 1
+          ELSE
+              0
+      END AS ShirtFlag
+
+FROM AlohaCo.Retail.Sale <mark>AS A</mark>
+
+LEFT JOIN AlohaCo.Retail.Customer <mark>AS B</mark>
+    ON A.CustomerId = B.CustomerId
+
+WHERE
+    A.StartDate >= '1/1/2000'
+
+GROUP BY
+      A.Name
+    , A.StartDate
+    , A.PhoneNumber
+    , A.EmailAddress
 </pre>
