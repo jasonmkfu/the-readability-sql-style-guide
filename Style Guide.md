@@ -936,10 +936,12 @@ WHERE
 
 
 # Aliases
-•	Aliases should be applied to fields, CASE statements, multiple tables, and sub-queries.
-•	All aliases should use the AS keyword. Do not use the “=” sign in place of the AS keyword.
-•	Do not use an alias with a space in it.
-•	Do not use the table alias convention of A, B, C, etc. or some other ordinal structure
+## <span style="color: green">A. Good</span>
+* Aliases should be applied to fields, CASE statements, multiple tables, and sub-queries.
+* All aliases should use the AS keyword. Do not use the “=” sign in place of the AS keyword.
+* Do not use an alias with a space in it.
+* Do not use the table alias convention of A, B, C, etc. or some other ordinal structure
+
 | ★ P-SQL Exception ★         |
 |:---------------------------|
 | In P-SQL you cannot use the AS keyword on tables.  In such cases, simply do not use the AS keyword, but still utilize the AS keyword for fieldnames.|
@@ -1047,4 +1049,117 @@ GROUP BY
     , A.StartDate
     , A.PhoneNumber
     , A.EmailAddress
+</pre>
+
+
+
+# Joins
+## <span style="color: green">A. Good</span>
+* Do not use OUTER in the join keywords (e.g. LEFT OUTER JOIN)
+* Do not use the "old" style of joining tables where all tables are listed in the FROM statement and then joined in the WHERE statement.
+* The join condition (ON keyword) should be on a separate line from the table with one indentation.
+* If the join has more than one condition to join on, each subsequent condition should align with the ON.
+* The ordering of the table in the join condition should be: table you are joining from &lt;operator&gt; table you are joining to
+
+<pre>
+SELECT
+      ST.Name as StoreName
+    , IT.Name AS ItemName
+    , SA.SaleDate
+    , CU.Name AS CustomerName
+
+FROM AlohaCo.Retail.Sale AS SA
+
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+    ON SA.CustomerId = CU.CustomerId
+
+LEFT JOIN AlohaCo.Retail.Item AS IT
+    ON SA.ItemId = IT.ItemId
+
+LEFT JOIN AlohaCo.Retail.Store AS ST
+    ON SA.StoreId = ST.StoreId
+    AND Sale.SaleDate >= ST.EffectiveStartDate
+    AND Sale.SaleDate <= ST.EffectiveEndDate
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+## <span style="color: red">B. Not so Good</span>
+* Including "OUTER" in the JOIN statement
+* Misaligned join condition
+<pre>
+SELECT
+      ST.Name as StoreName
+    , IT.Name AS ItemName
+    , SA.SaleDate
+    , CU.Name AS CustomerName
+
+FROM AlohaCo.Retail.Sale AS SA
+
+LEFT <mark>OUTER</mark> JOIN AlohaCo.Retail.Customer AS CU
+    ON SA.CustomerId = CU.CustomerId
+
+LEFT JOIN AlohaCo.Retail.Item AS IT
+    ON SA.ItemId = IT.ItemId
+
+LEFT <mark>OUTER</mark> JOIN AlohaCo.Retail.Store AS ST
+<mark>    </mark>ON SA.StoreId = ST.StoreId
+<mark>        </mark>AND Sale.SaleDate >= ST.EffectiveStartDate
+<mark>        </mark>AND Sale.SaleDate <= ST.EffectiveEndDate
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+## <span style="color: red">C. Not so Good</span>
+* Misaligned JOIN conditions
+* Table ordering in join condition is not table you are joining from <operator> table you are joining to
+* First Join condition should immediately follow the ON keyword on the same line
+<pre>
+SELECT
+      ST.Name as StoreName
+    , IT.Name AS ItemName
+    , SA.SaleDate
+    , CU.Name AS CustomerName
+
+FROM AlohaCo.Retail.Sale AS SA
+
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+    ON <mark>CU</mark>.CustomerId = <mark>SA</mark>.CustomerId
+
+LEFT JOIN AlohaCo.Retail.Item AS IT
+    <mark>ON</mark>
+        SA.ItemId = IT.ItemId
+
+LEFT JOIN AlohaCo.Retail.Store AS ST
+    ON <mark>     </mark>SA.StoreId = ST.StoreId
+    <mark>    </mark>AND Sale.SaleDate >= ST.EffectiveStartDate
+    <mark>    </mark>AND Sale.SaleDate <= ST.EffectiveEndDate
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+## <span style="color: red">D. Not so Good</span>
+* ON keyword not indented
+* ON keyword not on its own line
+* Join condition not on its own line
+<pre>
+SELECT
+      ST.Name as StoreName
+    , IT.Name AS ItemName
+    , SA.SaleDate
+    , CU.Name AS CustomerName
+
+FROM AlohaCo.Retail.Sale AS SA
+
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+<mark>ON</mark> SA.CustomerId = CU.CustomerId
+
+LEFT JOIN AlohaCo.Retail.Item AS IT <mark>ON</mark> SA.ItemId = IT.ItemId
+
+LEFT JOIN AlohaCo.Retail.Store AS ST
+    ON SA.StoreId = ST.StoreId <mark>AND</mark> Sale.SaleDate >= ST.EffectiveStartDate <mark>AND</mark> Sale.SaleDate <= ST.EffectiveEndDate
+
+WHERE
+    CU.StartDate >= '1/1/2000'
 </pre>
