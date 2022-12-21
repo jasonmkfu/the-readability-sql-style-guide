@@ -1,5 +1,3 @@
-Consequently, the style guide defers to improved readability and comprehension over space conservation.
-
 # SQL Keywords
 Capitalizing SQL keywords allows for easier comprehension by the reader by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in comprehension by coloring SQL keywords.
 ## <span style="color: green">A. Good</span>
@@ -7,7 +5,9 @@ Capitalizing SQL keywords allows for easier comprehension by the reader by diffe
 <pre>
 <mark>SELECT</mark>
     CU.Name
+
 <mark>FROM</mark> AlohaCo.Retail.Customer <mark>AS</mark> CU
+
 <mark>WHERE</mark>
     CU.StartDate >= '1/1/2000'
 </pre>
@@ -16,7 +16,9 @@ Capitalizing SQL keywords allows for easier comprehension by the reader by diffe
 <pre>
 <mark>select</mark>
     CU.Name
+
 <mark>From</mark> AlohaCo.Retail.Customer <mark>as</mark> CU
+
 <mark>WhErE</mark>
     CU.StartDate >= '1/1/2000'
 </pre>
@@ -50,7 +52,9 @@ SELECT
 <mark>,</mark>CU.StartDate
 <mark>,</mark>CU.PhoneNumber
 ,CU.EmailAddress
+
 FROM AlohaCo.Retail.Customer AS CU
+
 WHERE
 <mark>CU</mark>.StartDate >= '1/1/2000'
 </pre>
@@ -127,6 +131,7 @@ WHERE
 * Employs the `USE` keyword to define the database context instead of using the fully qualified name
 <pre>
 <mark>USE AlohaCo;</mark>
+
 SELECT
       CU.Name
     , CU.StartDate
@@ -863,7 +868,7 @@ WHERE
 # OVER (Window Function)
 Window functions can add additional complexity to the `SELECT` statement.  The window function style focuses on improving readability of the window function code and visually separating the window block from surrounding `SELECT` objects.
 ## <span style="color: green">A. Good</span>
-* The `PARTITION BY` keyword immediately follows the OVER clause on its own line and indented
+* The `PARTITION BY` keyword immediately follows the `OVER` clause on its own line and indented
 * Field names in the `PARTITION BY` or `ORDER BY` clause should be indented an additional time from the Window function
 * Field names in the `PARTITION BY` or `ORDER BY` clause should be on separate line with first-field alignment applied
 * The closing parentheses should be on a separate line along with an alias
@@ -916,6 +921,7 @@ SELECT
     <mark>O</mark>RDER BY
         <mark>S</mark>A.SaleDate ASC
         , SA.TransactionId ASC<mark>)</mark> AS SaleRowNumber
+
 FROM AlohaCo.Retail.Sale AS SA
 
 WHERE
@@ -1162,7 +1168,7 @@ WHERE
 * Apply all other styles within the CTE as would for any other `SELECT` statement
 * Closing parentheses should be on a separate line and align with the CTE’s declaration
 * Add comments describing the contents of the CTE immediately preceding each CTE declaration
-* Insert a blank line after the end of each CTE, including the last CTE and the beginning of the SELECT statement
+* Insert a blank line after the end of each CTE, including the last CTE and the beginning of the `SELECT` statement
 <pre>
 <mark>-- Determine the first shirt sale for every customer</mark>
 WITH FirstShirtSale AS (
