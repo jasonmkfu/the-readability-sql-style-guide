@@ -979,9 +979,9 @@ GROUP BY
     , CU.EmailAddress
 </pre>
 ## <span style="color: red">B. Not so Good</span>
-* Do not use the equal (=) sign to assingn an alias, use "AS"
-* Do not include spaces in the alias name
-* Do not omit the "AS" for table/view aliases
+* Uses the equal (=) sign to assingn an alias, use "AS"
+* Spaces included in the alias name
+* "AS" does not precede table/view alias
 <pre>
 SELECT
       CU.Name
@@ -1017,7 +1017,7 @@ GROUP BY
 </pre>
 
 ## <span style="color: red">C. Not so Good</span>
-* Do not use ordinal table aliasing
+* Uses ordinal table aliasing
 <pre>
 SELECT
       A.Name
