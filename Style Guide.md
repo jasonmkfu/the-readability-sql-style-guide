@@ -1,9 +1,15 @@
 # Using the Guide
+## Consistency
+While there are many ways to style SQL code, the number one rule, regardless ofstyle choice, is to remain consistent.  Switching styles throughout a query decreases readability.
+## Markdown Reader
 The Readability Style Guide is perfectly usable from within Github, however, opening the markdown document in a markdown editor such as Visual Studio Code will allow you to see highlighted sections of SQL that further assists understanding the definition of each style.
 
 _Example from Visual Studio Code:_
 
 ![Highlighted SQL Example](/images/HighlightingExample.png)
+
+## Further Discussion Sections
+In cases where the choice of the style is very debatable, an additional section is included to further explain the reasoning for the choice of the style.  These explanations are placed in a drop down section as they are not essential to the style guide, but included for the curious reader.
 # SQL Keywords
 Capitalizing SQL keywords allows for easier comprehension by the reader by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in comprehension by coloring SQL keywords.
 ## <span style="color: green">A. Good</span>
@@ -31,7 +37,13 @@ Capitalizing SQL keywords allows for easier comprehension by the reader by diffe
 
 
 # Identation and Tabs/Spaces
-Indenting is common practice across all programming languages.  In SQL, it assists the comprehension of the code by the reader by using indentation to associate portions of code to SQL keywords.  While there is debate between indenting using tabs or spaces, spaces are chosen because the width of the indentation will be uniform regardless of the environment, whereas tabs can vary across environments.  Furthermore, many modern code editors can automatically insert spaces when pressing the TAB key.
+Indentation is common practice across all programming languages.  In SQL, it assists readability by using whitespace to visually dilineate portions of code.  Many modern code editors can automatically insert spaces when pressing the TAB key.
+
+<details>
+  <summary>Further Discussion</summary>
+  While there is debate between indenting using tabs or spaces, spaces are chosen because the width of the indentation will be uniform regardless of the environment, whereas tabs can vary across environments.
+</details>
+
 ## <span style="color: green">A. Good</span>
 * Indentation should identify that the code relates to the section it is indented from, e.g. the indented lines from a `SELECT` keyword indicate that the code relates to a `SELECT` statement
 * Each indentation should consist of four (4) space characters
@@ -82,7 +94,7 @@ WHERE
 </pre>
 
 # Spaces
-Eliminating trailing spaces is good practice to maintain clean code.  Spaces preceding and following logical operations allows for a clear understanding of what is being compared to the left and the right of the operator.
+Eliminating trailing spaces is good practice to maintain clean code.  Spaces preceding and following logical operations uses white space to dilineate the logical operator from the two expressions.
 ## <span style="color: green">A. Good</span>
 * Each section of SQL code should NOT have trailing spaces (trailing spaces are normally not visible unless you highlight multiple rows of text or your text editor settings are set to show spaces/tabs)
 * Logical operators in equations/conditions should have spaces before and after them
@@ -119,6 +131,8 @@ WHERE
 
 
 # Fully Qualified Table/View Names
+
+Some Integrated Development Environments (IDE), such as SQL Server Management Studio, allow users to define the working database for a particular query.  This allows users to ommit the database when referencing tables/views e.g. using `Retail.Customer` instead of `AlohaCo.Retail.Customer`.  Using Fully Qualified Names (FQN) removes database ambiguity by always listing the database.  This is especially helpful when SQL is shared to others.
 ## <span style="color: green">A. Good</span>
 * Use fully qualified names for tables and views: Database.Schema.TableOrViewName.
 <pre>
@@ -152,6 +166,7 @@ WHERE
 
 
 # Comparison Operators
+SQL engines often have a variety of comparison operators, with some consistent across most engines and others being engine specific.  The six (6) operators defined in the style are those common across most engines.
 ## <span style="color: green">A. Good</span>
 * While other operators may function in a similar manner, only use the six comparison operators listed below.
 <pre>
@@ -351,6 +366,49 @@ Sometimes it is useful to stylize your comments to indicate different sections o
 </pre>
 # Parentheses
 Similar to evaluating mathematical equations where the order of operations is applied to determine the equation's evaluation order, when using multiple, different logical operators, it is important to use parentheses to define the order in which the SQL engine evaluates logical operator comparisons.
+
+<details>
+  <summary>Further Discussion</summary>
+Same line versus new line for curly braces is always a debate in various programming languages, for example:
+<pre>
+// A
+function example() {
+    return;
+}
+
+// B
+function example()
+{
+    return;
+}
+</pre>
+While SQL does not have curly braces, a similar situation occurs in SQL with the usage of parentheses.  While it can be agreed upon to put the closing parentheses on a new line, the bigger question is if the opening parentheses should be placed on the same line as the logical operator or begin on a new line?  The two choices are illustrated below.  The same line approach is chosen because the left parentheses being "attached" to the `OR` allows the reader to process the logical operator in their mind in one step: "This is an `OR` block and everything on the next line is related to it."  Whereas the new line approach requires a two-step thought process: "This is an `OR`, okay let me look at the next line.  This is a parentheses that must be related to the `OR` on the preceding line."
+<pre>
+-- A: Same line opening parentheses
+WHERE
+    (
+        CU.State = 'HI'
+        AND CU.PhoneNumber LIKE '808-%'
+    )
+    OR (
+        CU.State = 'CA'
+        AND CU.PhoneNumber LIKE '415-%'
+    )
+
+-- B: New line opening parentheses
+WHERE
+    (
+        CU.State = 'HI'
+        AND CU.PhoneNumber LIKE '808-%'
+    )
+    OR
+    (
+        CU.State = 'CA'
+        AND CU.PhoneNumber LIKE '415-%'
+    )
+</pre>
+</details>
+
 ## <span style="color: green">A. Good</span>
 * Parentheses must be used when using `OR` logic
 <pre>
@@ -1313,23 +1371,3 @@ LEFT JOIN (<mark>SELECT SA.CustomerId, MIN(SA.SaleDate) AS FirstSaleDate FROM Al
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-
-
-
-
-<details>
-  <summary>Click me</summary>
-
-  ### Heading
-  1. Foo
-  2. Bar
-     * Baz
-     * Qux
-
-  ### Some Code
-  ```js
-  function logSomething(something) {
-    console.log('Something', something);
-  }
-  ```
-</details>
