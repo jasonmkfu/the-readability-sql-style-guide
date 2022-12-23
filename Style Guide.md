@@ -1,3 +1,9 @@
+# Using the Guide
+The Readability Style Guide is perfectly usable from within Github, however, opening the markdown document in a markdown editor such as Visual Studio Code will allow you to see highlighted sections of SQL that further assists understanding the definition of each style.
+
+_Example from Visual Studio Code:_
+
+![Highlighted SQL Example](/images/HighlightingExample.png)
 # SQL Keywords
 Capitalizing SQL keywords allows for easier comprehension by the reader by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in comprehension by coloring SQL keywords.
 ## <span style="color: green">A. Good</span>
@@ -1307,3 +1313,23 @@ LEFT JOIN (<mark>SELECT SA.CustomerId, MIN(SA.SaleDate) AS FirstSaleDate FROM Al
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
+
+
+
+
+<details>
+  <summary>Click me</summary>
+
+  ### Heading
+  1. Foo
+  2. Bar
+     * Baz
+     * Qux
+
+  ### Some Code
+  ```js
+  function logSomething(something) {
+    console.log('Something', something);
+  }
+  ```
+</details>
