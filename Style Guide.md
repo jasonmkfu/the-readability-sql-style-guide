@@ -306,7 +306,6 @@ Sometimes it is useful to stylize your comments to indicate different sections o
 * Inconsistent width of header characters
 * Width is too short in the sub-header
 * Lack of indentation beneath header
-</span>
 <pre><mark>/*</mark>**********************
 <mark>**</mark>  Retail Sales
 <mark>**</mark>********************<mark>*******</mark>**/
@@ -417,8 +416,7 @@ WHERE
     <mark>)</mark>
 </pre>
 ## <span style="color: red">B. Not so Good</span>
-* No parentheses around 1OR1 logic makes the logic ambiguous
-</span>
+* No parentheses around `OR` logic makes the logic ambiguous
 <pre>
 SELECT
       CU.Name
@@ -456,7 +454,6 @@ WHERE
 
 ## <span style="color: red">B. Not so Good</span>
 * Using brackets when not required
-</span>
 <pre>
 SELECT
       CU.<mark>[</mark>Name<mark>]</mark>
@@ -993,8 +990,6 @@ WHERE
     SA.SaleDate >= '1/1/2000'
     AND SA.SaleDate < '1/1/2001'
 </pre>
-
-
 
 
 # Aliases
