@@ -1,4 +1,5 @@
-# SQL Keywords
+# The Readability SQL Style Guide
+## SQL Keywords
 Capitalizing SQL keywords allows for easier readability by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in readability by coloring SQL keywords.
 ### <span style="color: green">A. Good</span>
 * SQL Keywords such as `SELECT`, `FROM`, `WHERE`, `INNER JOIN`, `LEFT JOIN`, `ON`, etc. should always be in all caps
@@ -11,7 +12,7 @@ Capitalizing SQL keywords allows for easier readability by differentiating it fr
 <mark>WHERE</mark>
     CU.StartDate >= '1/1/2000'
 </pre>
-#### <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Keywords not in all caps
 <pre>
 <mark>select</mark>
@@ -24,7 +25,7 @@ Capitalizing SQL keywords allows for easier readability by differentiating it fr
 </pre>
 
 
-# Identation and Tabs/Spaces
+## Identation and Tabs/Spaces
 Indentation is common practice across all programming languages.  In SQL, it assists readability by using whitespace to visually dilineate portions of code.  Many modern code editors can automatically insert spaces when pressing the TAB key.
 
 <details>
@@ -32,7 +33,7 @@ Indentation is common practice across all programming languages.  In SQL, it ass
   While there is debate between indenting using tabs or spaces, spaces are chosen because the width of the indentation will be uniform regardless of the environment, whereas tabs can vary across environments.
 </details>
 
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Indentation should identify that the code relates to the section it is indented from, e.g. the indented lines from a `SELECT` keyword indicate that the code relates to a `SELECT` statement
 * Each indentation should consist of four (4) space characters
 * _Note: The bullet/arrow characters in the examples below are used to illustrate the use of spaces/tabs and should not be included in the SQL_
@@ -49,7 +50,7 @@ FROM AlohaCo.Retail.Customer AS CU
 WHERE
    CU.StartDate >= '1/1/2000'
 </pre>
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Indentation logic is not used for fieldnames in the `SELECT`
 * Indentation logic is not used in the `WHERE` clause
 <pre>
@@ -65,7 +66,7 @@ WHERE
 <mark>CU</mark>.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">C. Not so Good</span>
+### <span style="color: red">C. Not so Good</span>
 * Two (2) spaces are used instead of four (4) spaces
 * Tab characters are used instead of spaces
 <pre>
@@ -81,9 +82,9 @@ WHERE
 <mark> →</mark>CU.StartDate >= '1/1/2000'
 </pre>
 
-# Spaces
+## Spaces
 Eliminating trailing spaces is good practice to maintain clean code.  Spaces preceding and following logical operations uses white space to dilineate the logical operator from the two expressions.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Each section of SQL code should NOT have trailing spaces (trailing spaces are normally not visible unless you highlight multiple rows of text or your text editor settings are set to show spaces/tabs)
 * Logical operators in equations/conditions should have spaces before and after them
 
@@ -100,7 +101,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Trailing spaces
 * No space before and after the "=" operator
 * _Note: The bullet characters in the example below are used to illustrate the use of spaces and should not be included in the SQL_
@@ -118,10 +119,10 @@ WHERE
 </pre>
 
 
-# Fully Qualified Table/View Names
+## Fully Qualified Table/View Names
 
 Some Integrated Development Environments (IDE), such as SQL Server Management Studio, allow users to define the working database for a particular query.  This allows users to ommit the database when referencing tables/views e.g. using `Retail.Customer` instead of `AlohaCo.Retail.Customer`.  Using Fully Qualified Names (FQN) removes database ambiguity by always listing the database.  This is especially helpful when SQL is shared to others.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Use fully qualified names for tables and views: Database.Schema.TableOrViewName.
 <pre>
 SELECT
@@ -135,7 +136,7 @@ FROM <mark>AlohaCo.Retail.Customer</mark> AS CU
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Employs the `USE` keyword to define the database context instead of using the fully qualified name
 <pre>
 <mark>USE AlohaCo;</mark>
@@ -153,9 +154,9 @@ WHERE
 </pre>
 
 
-# Comparison Operators
+## Comparison Operators
 SQL engines often have a variety of comparison operators, with some consistent across most engines and others being engine specific.  The six (6) operators defined in the style are those common across most engines.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * While other operators may function in a similar manner, only use the six comparison operators listed below.
 <pre>
 =    Equal to
@@ -166,16 +167,16 @@ SQL engines often have a variety of comparison operators, with some consistent a
 >=   Greater than or equal to
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 <pre>
 !=   Not equal to
 !<   Not less than
 !>   Not greater than
 </pre>
 
-# Comments
+## Comments
 Comments can help the reader to understand background information or particular portions of complicated SQL.  Comments can also serve as a way to document changes that have occurred over time by documenting changes done on a specific date.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Do not insert comments that are not useful
 * Use block style comments with `/*` and `*/` for three (3) or more lines of comments.  For block comments, the beginning and ending comment clauses should be on separate lines with the text comments set to one indentation between the clauses
 * Use `--` for one (1) to two (2) lines of comments. A space character should immediately follow the beginning of either a single line or block comment declaration
@@ -212,7 +213,7 @@ GROUP BY
     , SA.SubCategoryId
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * No usage of block comments for comments that span three or more lines
 * No space following single line comments
 
@@ -244,10 +245,10 @@ GROUP BY
     , SA.CategoryId
     , SA.SubCategoryId
 </pre>
-# Comment Headers (Optional)
+## Comment Headers (Optional)
 Sometimes it is useful to stylize your comments to indicate different sections of code.  This helps the reader find specific areas of code faster and have a high-level understanding of the different parts of your code.  These stylized comment headers are optional and are provided as a template.
 
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Use the asterisk (`*`) character for headers
     * A 100 character width is used in the example to better fit this document
     * 150 characters is a better real-world width
@@ -302,7 +303,7 @@ Sometimes it is useful to stylize your comments to indicate different sections o
                     , SA.SubCategoryId;
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Inconsistent width of header characters
 * Width is too short in the sub-header
 * Lack of indentation beneath header
@@ -351,7 +352,7 @@ Sometimes it is useful to stylize your comments to indicate different sections o
     , SA.CategoryId
     , SA.SubCategoryId;
 </pre>
-# Parentheses
+## Parentheses
 Similar to evaluating mathematical equations where the order of operations is applied to determine the equation's evaluation order, when using multiple, different logical operators, it is important to use parentheses to define the order in which the SQL engine evaluates logical operator comparisons.
 
 <details>
@@ -396,7 +397,7 @@ WHERE
 </pre>
 </details>
 
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Parentheses must be used when using `OR` logic
 <pre>
 SELECT
@@ -415,7 +416,7 @@ WHERE
         AND CU.PhoneNumber LIKE '808-%'
     <mark>)</mark>
 </pre>
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * No parentheses around `OR` logic makes the logic ambiguous
 <pre>
 SELECT
@@ -433,9 +434,9 @@ WHERE
     AND CU.PhoneNumber LIKE '808-%'
 </pre>
 
-# Brackets
+## Brackets
 Including brackets when they are not needed adds additional visual clutter that decreases readability.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Do not use square brackets unless there are spaces in the database object names or syntax dependent
 <pre>
 SELECT
@@ -452,7 +453,7 @@ WHERE
     AND CU.State = 'HI'
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Using brackets when not required
 <pre>
 SELECT
@@ -469,9 +470,9 @@ WHERE
 </pre>
 
 
-# New Lines
+## New Lines
 This is a debatable style requirement, especially for simple queries with only a few fields or tables.  However, the majority of queries will not be simple.  Consequently, by inserting new lines in-between SQL keyword sections, it assists readability by using white space to distinguish different sections of code.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Insert blank lines in-between SQL keyword sections such as `FROM`, `JOIN`, `WHERE`, `GROUP BY`, `ORDER BY`, etc.
 <pre>
 SELECT
@@ -496,7 +497,7 @@ GROUP BY
     , CU.EmailAddress
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * No new line between SQL Keyword sections
 <pre>
 SELECT
@@ -518,12 +519,12 @@ SELECT
 </pre>
 
 
-# SELECT
+## SELECT
 Placing the `SELECT` keyword on its own line helps highlight the beginning of a `SELECT` statement which helps readability.
 
 <details>
   <summary>Further Discussion</summary>
-It could be argued that in instances where there is only a single field in the `SELECT` or a single predicate in the `WHERE` that a new line is not necessary for the same reason that a table/view is kept on the same line when following the `FROM` keyword.  However, to maintain consistency, the "one-to-many new line" rule (see README.md) applies for `SELECT` and `WHERE` statements but does not for `FROM` statements.
+It could be argued that in instances where there is only a single field in the `SELECT` or a single predicate in the `WHERE` that a new line is not necessary for the same reason that a table/view is kept on the same line when following the `FROM` keyword.  However, to maintain consistency, the "one-to-many new line" rule (see [Appendix](#appendix)) applies for `SELECT` and `WHERE` statements but does not for `FROM` statements.
 <pre>
 SELECT CU.Name
 
@@ -533,7 +534,7 @@ WHERE CU.StartDate >= '1/1/2000'
 </pre>
 </details>
 
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * The `SELECT` keyword is always on a separate line
 <pre>
 <mark>SELECT</mark>
@@ -548,7 +549,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * `SELECT` and fieldname are on the same line
 <pre>
 SELECT <mark>CU.Name</mark>
@@ -563,12 +564,12 @@ WHERE
 </pre>
 
 
-# DISTINCT
+## DISTINCT
 Similar to the reasoning for the `SELECT` keyword to exist on its own line, the `DISTINCT` keyword affects the behavior of the `SELECT`, so including it on the same line as its related `SELECT` keep related keywords together.
 | ★ WARNING ★         |
 |:---------------------------|
 | The use of the `DISTINCT` keyword should be used sparingly as it can often be an expensive query|
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * The `DISTINCT` keyword should immediately follow and be placed on the same line as the `SELECT` keyword
 * A line break should immediately follow the `DISTINCT` keyword
 <pre>
@@ -582,7 +583,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Fieldnames should begin on a separate line
 <pre>
 SELECT DISTINCT <mark>CU.State</mark>
@@ -594,7 +595,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">C. Not so Good</span>
+### <span style="color: red">C. Not so Good</span>
 * DISTINCT is on its own line
 <pre>
 SELECT
@@ -609,9 +610,9 @@ WHERE
 </pre>
 
 
-# Multiple Field Listing
+## Multiple Field Listing
 There is varying opinion regarding leading or trailing commas.  Leading commas are recommended for this style because it is easier to identify missing commas while adding new fields because they line up vertically.  Similarly, opinion on first-field alignment also differs, however, the style guide opts for first field alignment as it makes easier to read the list of fields.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Each field should be on its own line with one indent to the right of the clause it is relating to (`SELECT`, `WHERE`, `GROUP BY`, etc.)
 * Each subsequent field should utilize leading commas
 * One (1) space should immediately follow the comma followed by the field name
@@ -629,7 +630,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Field names not on separate lines
 <pre>
 SELECT
@@ -641,7 +642,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">C. Not so Good</span>
+### <span style="color: red">C. Not so Good</span>
 * Trailing commas instead of leading commas
 <pre>
 SELECT
@@ -656,7 +657,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">D. Not so Good</span>
+### <span style="color: red">D. Not so Good</span>
 * No space following each comma
 * No first-field alignment
 <pre>
@@ -672,7 +673,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">E. Not so Good</span>
+### <span style="color: red">E. Not so Good</span>
 * Columns not indented
 <pre>
 SELECT
@@ -687,10 +688,9 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-
-# FROM
+## FROM
 Because there is only ever one table/view that follows the `FROM` keyword, the table/view is placed on the same line rather than on a separate line.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * The `FROM` keyword should include the table name on the same line.  It should NOT be placed on its own line.
 <pre>
 SELECT
@@ -705,7 +705,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * The `FROM` keyword and the table/view are on separate lines
 <pre>
 SELECT CU.Name
@@ -721,9 +721,9 @@ WHERE
 </pre>
 
 
-# WHERE
+## WHERE
 The `WHERE` clause can include one or many predicates.  While it may make sense when there is only one predicate that it exist on the same line as the `WHERE` keyword, because many predicates can also exist, the style guide opts for a consistent rule for all cases and requires the separate lines approach.  First-field alignment should not be used due to the varying indentation that would be required because of the different lengths of `AND` and `OR` keywords.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * The `WHERE` clause should exist on its own line
 * Each logical condition in the `WHERE` clause should be placed on its own line with appropriate indentation
 * Do not apply first-field alignment
@@ -745,7 +745,7 @@ WHERE
 <mark>    </mark>)
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Predicate should be on a separate line from the `WHERE` keyword
 <pre>
 SELECT
@@ -759,7 +759,7 @@ FROM AlohaCo.Database.Retail.Customer AS CU
 WHERE<mark> </mark>CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">C. Not so Good</span>
+### <span style="color: red">C. Not so Good</span>
 * Predicates are not on separate lines
 <pre>
 SELECT
@@ -778,7 +778,7 @@ WHERE
     )
 </pre>
 
-## <span style="color: red">D. Not so Good</span>
+### <span style="color: red">D. Not so Good</span>
 * Do not apply first-field alignment
 <pre>
 SELECT
@@ -798,7 +798,7 @@ WHERE
     )
 </pre>
 
-## <span style="color: red">E. Not so Good</span>
+### <span style="color: red">E. Not so Good</span>
 * No indentation of predicates in relation to the WHERE keyword
 <pre>
 SELECT
@@ -819,9 +819,9 @@ WHERE
 </pre>
 
 
-# IN
+## IN
 Values in an `IN` statement should be treated similarly to the Multiple Field Listing style with the addition of adding the name equivalent for values that represent an ID or code.  Including the "name" equivalent helps the reader understand what the list represents without having to write another query to determine the "names" of the listed values.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * Each field should be on its own line with one indent to the right of the opening parentheses
 * Each subsequent field should utilize leading commas
 * One (1) space should immediately follow the comma followed by the field name
@@ -846,7 +846,7 @@ WHERE
     )
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Individual values are not on separate lines
 * No "name" equivalents included
 <pre>
@@ -865,7 +865,7 @@ WHERE
     )
 </pre>
 
-## <span style="color: red">C. Not so Good</span>
+### <span style="color: red">C. Not so Good</span>
 * List of values does not start on a separate line
 <pre>
 SELECT
@@ -881,7 +881,7 @@ WHERE
     AND CU.CustomerLoyaltyCardLevel IN (<mark>1</mark>, 2, 3, 202)
 </pre>
 
-## <span style="color: red">D. Not so Good</span>
+### <span style="color: red">D. Not so Good</span>
 * "Name" equivalents are not aligned to one space after the right-most value
 <pre>
 SELECT
@@ -902,7 +902,7 @@ WHERE
     )
 </pre>
 
-## <span style="color: red">E. Not so Good</span>
+### <span style="color: red">E. Not so Good</span>
 * List of values are not indented from its parent clause
 * Commas should precede each value followed by a space and not after each value
 <pre>
@@ -927,9 +927,9 @@ WHERE
 
 
 
-# OVER (Window Function)
+## OVER (Window Function)
 Window functions can add additional complexity to the `SELECT` statement.  The window function style focuses on improving readability of the window function code and visually separating the window block from surrounding `SELECT` objects.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * The `PARTITION BY` keyword immediately follows the `OVER` clause on its own line and indented
 * Field names in the `PARTITION BY` or `ORDER BY` clause should be indented an additional time from the Window function
 * Field names in the `PARTITION BY` or `ORDER BY` clause should be on separate line with first-field alignment applied
@@ -962,7 +962,7 @@ WHERE
     AND SA.SaleDate < '1/1/2001'
 </pre>
 
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * No carriage returns before and after the window function code
 * `PARTITION BY` not on a separate line
 * `PARTITION BY` field names not on separate lines line
@@ -992,8 +992,8 @@ WHERE
 </pre>
 
 
-# Aliases
-## <span style="color: green">A. Good</span>
+## Aliases
+### <span style="color: green">A. Good</span>
 * Aliases should be applied to fields, `CASE` statements, multiple tables, and sub-queries
 * All aliases should use the AS keyword. Do not use the "=" sign in place of the `AS` keyword
 * Do not use an alias with a space in it
@@ -1035,7 +1035,7 @@ GROUP BY
     , CU.PhoneNumber
     , CU.EmailAddress
 </pre>
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Uses the equal (=) sign to assingn an alias, use `AS`
 * Spaces included in the alias name
 * `AS` does not precede table/view alias
@@ -1073,7 +1073,7 @@ GROUP BY
     , CU.EmailAddress
 </pre>
 
-## <span style="color: red">C. Not so Good</span>
+### <span style="color: red">C. Not so Good</span>
 * Uses ordinal table aliasing
 <pre>
 SELECT
@@ -1110,8 +1110,8 @@ GROUP BY
 
 
 
-# Joins
-## <span style="color: green">A. Good</span>
+## Joins
+### <span style="color: green">A. Good</span>
 * Do not use `OUTER` in the `JOIN` keywords (e.g. `LEFT OUTER JOIN`)
 * Do not use the "old" style of joining tables where all tables are listed in the `FROM` statement and then joined in the WHERE statement.
 * The join condition (`ON` keyword) should be on a separate line from the table with one indentation.
@@ -1141,7 +1141,7 @@ LEFT JOIN AlohaCo.Retail.Store AS ST
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-## <span style="color: red">B. Not so Good</span>
+### <span style="color: red">B. Not so Good</span>
 * Including `OUTER` in the `JOIN` statement
 * Misaligned join condition
 <pre>
@@ -1168,7 +1168,7 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-## <span style="color: red">C. Not so Good</span>
+### <span style="color: red">C. Not so Good</span>
 * Misaligned `JOIN` conditions
 * Table ordering in join condition is not table you are joining from <operator> table you are joining to
 * First Join condition should immediately follow the `ON` keyword on the same line
@@ -1196,7 +1196,7 @@ LEFT JOIN AlohaCo.Retail.Store AS ST
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-## <span style="color: red">D. Not so Good</span>
+### <span style="color: red">D. Not so Good</span>
 * `ON` keyword not indented
 * `ON` keyword not on its own line
 * Join condition not on its own line
@@ -1221,8 +1221,8 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
-# CTEs and Sub-Queries
-## <span style="color: green">A. Good</span>
+## CTEs and Sub-Queries
+### <span style="color: green">A. Good</span>
 * The opening parentheses for each CTE should be preceded by a space and immediately follow the name of the CTE, e.g. `WITH CTEName AS (`
 * Place the ensuing `SELECT` statement on a new line with one indentation
 * Apply all other styles within the CTE as would for any other `SELECT` statement
@@ -1273,7 +1273,7 @@ LEFT JOIN FirstAnySale AS FAS
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-## <span style="color: green">B. Good</span>
+### <span style="color: green">B. Good</span>
 * Sub-query joins should begin with a space and then a left-parentheses
 * Sub-queries should begin on its own line and standard styles applied
 <pre>
@@ -1303,7 +1303,7 @@ LEFT JOIN<mark> (</mark>
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-## <span style="color: red">C. Not So Good</span>
+### <span style="color: red">C. Not So Good</span>
 * `AS` is on a separate line from the CTE name
 * , follows the end of the CTE rather than preceding the next CTE declaration
 * No comments explaining the content of each CTE
@@ -1351,7 +1351,7 @@ LEFT JOIN FirstAnySale AS FAS
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
-## <span style="color: red">B. Not So Good</span>
+### <span style="color: red">B. Not So Good</span>
 * Styles not applied to contents of sub-query
 <pre>
 
@@ -1367,3 +1367,35 @@ LEFT JOIN (<mark>SELECT SA.CustomerId, MIN(SA.SaleDate) AS FirstSaleDate FROM Al
 WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
+
+
+# Appendix
+
+## One-to-Many New Line Rule
+For lists of fields or conditions, where there can be one to many instances, the list is always started on a new line.  In the example below, the `IN` keyword has one-to-many values, thus the list starts on a new line.
+<pre>
+CU.CustomerLoyaltyCardLevel IN (
+      1   -- Bronze
+    , 2   -- Silver
+    , 3   -- Gold
+    , 202 -- Platinum
+)
+</pre>
+Similarly, for `SELECT` statements, there can be one-to-many fields selected so the list of fields start on a new line.
+<pre>
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+</pre>
+So because the `SELECT` is a one-to-many situation, the default style is to always begin a new line, so you would not do the following example even if there is only one field selected.
+<pre>
+SELECT CU.Name
+
+FROM AlohaCo.Database.Retail.Customer AS CU
+</pre>
+The `FROM` keyword on the other hand, is a one-and-only-one SQL keyword and thus the table/view following the `FROM` keyword can remain on the same line.
+Note: While old-style joins would make `FROM` a one-to-many keyword, the style guide does not allow old-style joins so it remains a one-and-only-one keyword.
