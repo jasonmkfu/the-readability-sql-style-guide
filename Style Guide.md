@@ -1,6 +1,6 @@
 # SQL Keywords
 Capitalizing SQL keywords allows for easier readability by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in readability by coloring SQL keywords.
-## <span style="color: green">A. Good</span>
+### <span style="color: green">A. Good</span>
 * SQL Keywords such as `SELECT`, `FROM`, `WHERE`, `INNER JOIN`, `LEFT JOIN`, `ON`, etc. should always be in all caps
 <pre>
 <mark>SELECT</mark>
