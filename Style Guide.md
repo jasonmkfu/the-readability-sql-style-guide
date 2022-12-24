@@ -1,17 +1,5 @@
-# Using the Guide
-## Consistency
-While there are many ways to style SQL code, the number one rule, regardless ofstyle choice, is to remain consistent.  Switching styles throughout a query decreases readability.
-## Markdown Reader
-The Readability Style Guide is perfectly usable from within Github, however, opening the markdown document in a markdown editor such as Visual Studio Code will allow you to see highlighted sections of SQL that further assists understanding the definition of each style.
-
-_Example from Visual Studio Code:_
-
-![Highlighted SQL Example](/images/HighlightingExample.png)
-
-## Further Discussion Sections
-In cases where the choice of the style is very debatable, an additional section is included to further explain the reasoning for the choice of the style.  These explanations are placed in a drop down section as they are not essential to the style guide, but included for the curious reader.
 # SQL Keywords
-Capitalizing SQL keywords allows for easier comprehension by the reader by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in comprehension by coloring SQL keywords.
+Capitalizing SQL keywords allows for easier readability by differentiating it from other SQL that often will be in CamelCase.  Additionally, code editors will often offer SQL syntax highlighting which further assists in readability by coloring SQL keywords.
 ## <span style="color: green">A. Good</span>
 * SQL Keywords such as `SELECT`, `FROM`, `WHERE`, `INNER JOIN`, `LEFT JOIN`, `ON`, etc. should always be in all caps
 <pre>
@@ -189,8 +177,8 @@ SQL engines often have a variety of comparison operators, with some consistent a
 Comments can help the reader to understand background information or particular portions of complicated SQL.  Comments can also serve as a way to document changes that have occurred over time by documenting changes done on a specific date.
 ## <span style="color: green">A. Good</span>
 * Do not insert comments that are not useful
-* Use block style comments with `/*` and `*/` for 3 or more lines of comments.  For block comments, the beginning and ending comment clauses should be on separate lines with the text comments set to one indentation between the clauses
-* Use `--` for 1 to 2 lines of comments. A space character should immediately follow the beginning of either a single line or block comment declaration
+* Use block style comments with `/*` and `*/` for three (3) or more lines of comments.  For block comments, the beginning and ending comment clauses should be on separate lines with the text comments set to one indentation between the clauses
+* Use `--` for one (1) to two (2) lines of comments. A space character should immediately follow the beginning of either a single line or block comment declaration
 <pre>
 <mark>/*</mark>
    Comments that span three or more lines should use block comments
@@ -317,7 +305,7 @@ Sometimes it is useful to stylize your comments to indicate different sections o
 ## <span style="color: red">B. Not so Good</span>
 * Inconsistent width of header characters
 * Width is too short in the sub-header
-* Lack of indentation beneath header.
+* Lack of indentation beneath header
 </span>
 <pre><mark>/*</mark>**********************
 <mark>**</mark>  Retail Sales
@@ -382,7 +370,7 @@ function example()
     return;
 }
 </pre>
-While SQL does not have curly braces, a similar situation occurs in SQL with the usage of parentheses.  While it can be agreed upon to put the closing parentheses on a new line, the bigger question is if the opening parentheses should be placed on the same line as the logical operator or begin on a new line?  The two choices are illustrated below.  The same line approach is chosen because the left parentheses being "attached" to the `OR` allows the reader to process the logical operator in their mind in one step: "This is an `OR` block and everything on the next line is related to it."  Whereas the new line approach requires a two-step thought process: "This is an `OR`, okay let me look at the next line.  This is a parentheses that must be related to the `OR` on the preceding line."
+While SQL does not have curly braces, a similar situation occurs in SQL with the usage of parentheses.  While it can be agreed upon to put the closing parentheses on a new line, the bigger question is if the opening parentheses should be placed on the same line as the logical operator or begin on a new line?  The two choices are illustrated below.  The same line approach is chosen because the left parentheses being "attached" to the `OR` allows the reader to process the logical operator in their mind in one step: "This is an `OR` block and everything on the next line is related to it."  Whereas the new line approach requires a two-step thought process: "This is an `OR`...okay let me look at the next line.  This is a parentheses...okay this must be related to the `OR` on the preceding line."
 <pre>
 -- A: Same line opening parentheses
 WHERE
@@ -535,6 +523,19 @@ SELECT
 
 # SELECT
 Placing the `SELECT` keyword on its own line helps highlight the beginning of a `SELECT` statement which helps readability.
+
+<details>
+  <summary>Further Discussion</summary>
+It could be argued that in instances where there is only a single field in the `SELECT` or a single predicate in the `WHERE` that a new line is not necessary for the same reason that a table/view is kept on the same line when following the `FROM` keyword.  However, to maintain consistency, the "one-to-many new line" rule (see README.md) applies for `SELECT` and `WHERE` statements but does not for `FROM` statements.
+<pre>
+SELECT CU.Name
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE CU.StartDate >= '1/1/2000'
+</pre>
+</details>
+
 ## <span style="color: green">A. Good</span>
 * The `SELECT` keyword is always on a separate line
 <pre>
@@ -569,7 +570,7 @@ WHERE
 Similar to the reasoning for the `SELECT` keyword to exist on its own line, the `DISTINCT` keyword affects the behavior of the `SELECT`, so including it on the same line as its related `SELECT` keep related keywords together.
 | ★ WARNING ★         |
 |:---------------------------|
-| The use of the `DISTINCT` keyword should be used sparingly as it can often be an expensive query.|
+| The use of the `DISTINCT` keyword should be used sparingly as it can often be an expensive query|
 ## <span style="color: green">A. Good</span>
 * The `DISTINCT` keyword should immediately follow and be placed on the same line as the `SELECT` keyword
 * A line break should immediately follow the `DISTINCT` keyword
