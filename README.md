@@ -1,6 +1,6 @@
 # The Readability SQL Style Guide
 
-Want to get straigh to the good stuff?  Jump to the [guide](/blob/main/README.md)!
+Want to get straight to the good stuff?  Jump to the [guide](https://github.com/jasonmkfu/the-readability-sql-style-guide/blob/main/README.md)!
 
 ## Overview
 SQL styling varies greatly from person to person.  This style guide defines a single way for all styles and seeks to explain the reasoning behind that choice.  The style guide often chooses readability over efficiency or succinctness.
