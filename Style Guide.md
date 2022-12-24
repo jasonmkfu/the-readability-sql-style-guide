@@ -524,7 +524,7 @@ Placing the `SELECT` keyword on its own line helps highlight the beginning of a 
 
 <details>
   <summary>Further Discussion</summary>
-It could be argued that in instances where there is only a single field in the `SELECT` or a single predicate in the `WHERE` that a new line is not necessary for the same reason that a table/view is kept on the same line when following the `FROM` keyword.  However, to maintain consistency, the "one-to-many new line" rule (see [Appendix](#appendix)) applies for `SELECT` and `WHERE` statements but does not for `FROM` statements.
+It could be argued that in instances where there is only a single field in the `SELECT` or a single predicate in the `WHERE` that a new line is not necessary for the same reason that a table/view is kept on the same line when following the `FROM` keyword.  However, to maintain consistency, the "one-to-many new line" rule (see ![Appendix](#appendix)) applies for `SELECT` and `WHERE` statements but does not for `FROM` statements.
 <pre>
 SELECT CU.Name
 
