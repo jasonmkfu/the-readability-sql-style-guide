@@ -36,7 +36,8 @@ Indentation is common practice across all programming languages.  In SQL, it ass
 ### <span style="color: green">A. Good</span>
 * Indentation should identify that the code relates to the section it is indented from, e.g. the indented lines from a `SELECT` keyword indicate that the code relates to a `SELECT` statement
 * Each indentation should consist of four (4) space characters
-* _Note: The bullet/arrow characters in the examples below are used to illustrate the use of spaces/tabs and should not be included in the SQL_
+
+_Note: The bullet/arrow characters in the examples below are used to illustrate the use of spaces/tabs and should not be included in the SQL_
 
 <pre>
 SELECT
@@ -104,7 +105,8 @@ WHERE
 ### <span style="color: red">B. Not so Good</span>
 * Trailing spaces
 * No space before and after the "=" operator
-* _Note: The bullet characters in the example below are used to illustrate the use of spaces and should not be included in the SQL_
+
+ _Note: The bullet characters in the example below are used to illustrate the use of spaces and should not be included in the SQL_
 <pre>
 SELECT
       CU.Name
@@ -472,6 +474,57 @@ WHERE
 
 ## New Lines
 This is a debatable style requirement, especially for simple queries with only a few fields or tables.  However, the majority of queries will not be simple.  Consequently, by inserting new lines in-between SQL keyword sections, it assists readability by using white space to distinguish different sections of code.
+
+<details>
+  <summary>Further Discussion</summary>
+The two example queries for the style are duplicated below, but without highlighing for easier comparison.  The style guide argues that the additional lines between SQL keywords increases readability by allowing the user to see "blocks" of SQL code.  SQL without new lines is similar to a book without paragraphs where it is sentence after sentence without meaningful breaks between concepts or ideas.
+
+<pre>
+-- Query with New Lines
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+    , SUM(SA.SaleAmount) AS SaleAmountTotal
+
+FROM AlohaCo.Retail.Sale AS SA
+
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+    ON SA.CustomerId = CU.CustomerId
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+
+GROUP BY
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+</pre>
+
+<pre>
+-- Query without New Lines
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+    , SUM(SA.SaleAmount) AS SaleAmountTotal
+FROM AlohaCo.Retail.Sale AS SA
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+    ON SA.CustomerId = CU.CustomerId
+WHERE
+    CU.StartDate >= '1/1/2000'
+GROUP BY
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+</pre>
+
+</details>
+
 ### <span style="color: green">A. Good</span>
 * Insert blank lines in-between SQL keyword sections such as `FROM`, `JOIN`, `WHERE`, `GROUP BY`, `ORDER BY`, etc.
 <pre>
@@ -616,7 +669,8 @@ There is varying opinion regarding leading or trailing commas.  Leading commas a
 * Each field should be on its own line with one indent to the right of the clause it is relating to (`SELECT`, `WHERE`, `GROUP BY`, etc.)
 * Each subsequent field should utilize leading commas
 * One (1) space should immediately follow the comma followed by the field name
-* _Note: The bullets in the examples below are used to illustrate the use of spaces and should not be included in the SQL_
+
+_Note: The bullets in the examples below are used to illustrate the use of spaces and should not be included in the SQL_
 <pre>
 SELECT
     <mark>∙∙</mark>CU.Name
