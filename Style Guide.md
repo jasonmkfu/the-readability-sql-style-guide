@@ -30,7 +30,12 @@ Indentation is common practice across all programming languages.  In SQL, it ass
 
 <details>
   <summary>Further Discussion</summary>
+
+  ---
+
   While there is debate between indenting using tabs or spaces, spaces are chosen because the width of the indentation will be uniform regardless of the environment, whereas tabs can vary across environments.
+
+  ---
 </details>
 
 ### <span style="color: green">A. Good</span>
@@ -359,6 +364,9 @@ Similar to evaluating mathematical equations where the order of operations is ap
 
 <details>
   <summary>Further Discussion</summary>
+
+---
+
 Same line versus new line for curly braces is always a debate in various programming languages, for example:
 <pre>
 // A
@@ -397,6 +405,8 @@ WHERE
         AND CU.PhoneNumber LIKE '415-%'
     )
 </pre>
+
+---
 </details>
 
 ### <span style="color: green">A. Good</span>
@@ -477,10 +487,13 @@ This is a debatable style requirement, especially for simple queries with only a
 
 <details>
   <summary>Further Discussion</summary>
-The two example queries for the style are duplicated below, but without highlighing for easier comparison.  The style guide argues that the additional lines between SQL keywords increases readability by allowing the user to see "blocks" of SQL code.  SQL without new lines is similar to a book without paragraphs where it is sentence after sentence without meaningful breaks between concepts or ideas.
+
+---
+
+The two example queries for the "New Lines" style are duplicated below, but without highlighing for easier comparison.  The style guide argues that the additional lines between SQL keywords increases readability by allowing the user to see "blocks" of SQL code.  SQL without new lines is similar to a book without paragraphs where it is sentence after sentence without meaningful breaks between concepts or ideas.
 
 <pre>
--- Query with New Lines
+-- A: Query with New Lines
 SELECT
       CU.Name
     , CU.StartDate
@@ -501,10 +514,8 @@ GROUP BY
     , CU.StartDate
     , CU.PhoneNumber
     , CU.EmailAddress
-</pre>
 
-<pre>
--- Query without New Lines
+-- B: Query without New Lines
 SELECT
       CU.Name
     , CU.StartDate
@@ -522,7 +533,7 @@ GROUP BY
     , CU.PhoneNumber
     , CU.EmailAddress
 </pre>
-
+---
 </details>
 
 ### <span style="color: green">A. Good</span>
@@ -571,13 +582,15 @@ SELECT
     , CU.EmailAddress
 </pre>
 
-
 ## SELECT
 Placing the `SELECT` keyword on its own line helps highlight the beginning of a `SELECT` statement which helps readability.
 
 <details>
   <summary>Further Discussion</summary>
-It could be argued that in instances where there is only a single field in the `SELECT` or a single predicate in the `WHERE` that a new line is not necessary for the same reason that a table/view is kept on the same line when following the `FROM` keyword.  However, to maintain consistency, the "one-to-many new line" rule (see ![Appendix](#appendix)) applies for `SELECT` and `WHERE` statements but does not for `FROM` statements.
+
+---
+
+It could be argued that in instances where there is only a single field in the `SELECT` or a single predicate in the `WHERE` that a new line is not necessary for the same reason that a table/view is kept on the same line when following the `FROM` keyword.  However, to maintain consistency, the "one-to-many new line" rule (see [Appendix](#one-to-many-new-line-rule)) applies for `SELECT` and `WHERE` statements but does not for `FROM` statements.
 <pre>
 SELECT CU.Name
 
@@ -585,6 +598,8 @@ FROM AlohaCo.Retail.Customer AS CU
 
 WHERE CU.StartDate >= '1/1/2000'
 </pre>
+
+---
 </details>
 
 ### <span style="color: green">A. Good</span>
@@ -663,8 +678,44 @@ WHERE
 </pre>
 
 
-## Multiple Field Listing
-There is varying opinion regarding leading or trailing commas.  Leading commas are recommended for this style because it is easier to identify missing commas while adding new fields because they line up vertically.  Similarly, opinion on first-field alignment also differs, however, the style guide opts for first field alignment as it makes easier to read the list of fields.
+## Multiple Item Listing
+There is varying opinion regarding leading or trailing commas.  Leading commas are recommended for this style because it is easier to identify missing commas while adding new fields because they line up vertically.  Similarly, opinion on first-item alignment also differs, however, the style guide opts for first-item alignment as it makes easier to read a list of fields.
+
+<details>
+  <summary>Further Discussion</summary>
+
+---
+
+Both examples below of leading and trailing commas are equally readable.  In both cases, the items in the listed fields are aligned with one another and on seaparate lines which improve readability.  Given that the two styles are equally readable, trailing commas are chosen simply because it is easier to identify missing commas when debugging errors.
+<pre>
+-- A: Leading Commas
+SELECT
+      CU.Name
+    , CU.StartDate
+    , CU.PhoneNumber
+    , CU.EmailAddress
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+
+-- B: Trailing Commas
+SELECT
+    CU.Name
+    CU.StartDate,
+    CU.PhoneNumber,
+    CU.EmailAddress,
+
+FROM AlohaCo.Retail.Customer AS CU
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
+
+---
+</details>
+
 ### <span style="color: green">A. Good</span>
 * Each field should be on its own line with one indent to the right of the clause it is relating to (`SELECT`, `WHERE`, `GROUP BY`, etc.)
 * Each subsequent field should utilize leading commas
@@ -713,7 +764,7 @@ WHERE
 
 ### <span style="color: red">D. Not so Good</span>
 * No space following each comma
-* No first-field alignment
+* No first-item alignment
 <pre>
 SELECT
     <mark>CU.Name</mark>
@@ -776,11 +827,11 @@ WHERE
 
 
 ## WHERE
-The `WHERE` clause can include one or many predicates.  While it may make sense when there is only one predicate that it exist on the same line as the `WHERE` keyword, because many predicates can also exist, the style guide opts for a consistent rule for all cases and requires the separate lines approach.  First-field alignment should not be used due to the varying indentation that would be required because of the different lengths of `AND` and `OR` keywords.
+The `WHERE` clause can include one or many predicates.  While it may make sense when there is only one predicate that it exist on the same line as the `WHERE` keyword, because many predicates can also exist, the style guide opts for a consistent rule for all cases and requires the separate lines approach.  First-item alignment should not be used due to the varying indentation that would be required because of the different lengths of `AND` and `OR` keywords.
 ### <span style="color: green">A. Good</span>
 * The `WHERE` clause should exist on its own line
 * Each logical condition in the `WHERE` clause should be placed on its own line with appropriate indentation
-* Do not apply first-field alignment
+* Do not apply first-item alignment
 <pre>
 SELECT
       CU.Name
@@ -833,7 +884,7 @@ WHERE
 </pre>
 
 ### <span style="color: red">D. Not so Good</span>
-* Do not apply first-field alignment
+* Do not apply first-item alignment
 <pre>
 SELECT
       CU.Name
@@ -874,7 +925,7 @@ WHERE
 
 
 ## IN
-Values in an `IN` statement should be treated similarly to the Multiple Field Listing style with the addition of adding the name equivalent for values that represent an ID or code.  Including the "name" equivalent helps the reader understand what the list represents without having to write another query to determine the "names" of the listed values.
+Values in an `IN` statement should be treated similarly to the Multiple Item Listing style with the addition of adding the name equivalent for values that represent an ID or code.  Including the "name" equivalent helps the reader understand what the list represents without having to write another query to determine the "names" of the listed values.
 ### <span style="color: green">A. Good</span>
 * Each field should be on its own line with one indent to the right of the opening parentheses
 * Each subsequent field should utilize leading commas
@@ -986,7 +1037,7 @@ Window functions can add additional complexity to the `SELECT` statement.  The w
 ### <span style="color: green">A. Good</span>
 * The `PARTITION BY` keyword immediately follows the `OVER` clause on its own line and indented
 * Field names in the `PARTITION BY` or `ORDER BY` clause should be indented an additional time from the Window function
-* Field names in the `PARTITION BY` or `ORDER BY` clause should be on separate line with first-field alignment applied
+* Field names in the `PARTITION BY` or `ORDER BY` clause should be on separate line with first-item alignment applied
 * The closing parentheses should be on a separate line along with an alias
 * The closing parentheses should be indented two spaces to align with the Window Function
 * Due to the complexity of window functions, blank lines should both precede and follow each window function
@@ -1021,7 +1072,7 @@ WHERE
 * `PARTITION BY` not on a separate line
 * `PARTITION BY` field names not on separate lines line
 * Opening parenthesis not on same line as the OVER keyword
-* First-field alignment not applied
+* First-item alignment not applied
 * `PARTITION BY` and `ORDER BY` not indented
 * Closing parenthesis not on its own line
 <pre>
@@ -1425,7 +1476,7 @@ WHERE
 
 # Appendix
 
-## One-to-Many New Line Rule
+## One-to-Many New Line Rule <a id="one-to-many-new-line-rule"></a>
 For lists of fields or conditions, where there can be one to many instances, the list is always started on a new line.  In the example below, the `IN` keyword has one-to-many values, thus the list starts on a new line.
 <pre>
 CU.CustomerLoyaltyCardLevel IN (
