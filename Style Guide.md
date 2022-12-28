@@ -35,6 +35,56 @@ Indentation is common practice across all programming languages.  In SQL, it ass
 
   While there is debate between indenting using tabs or spaces, spaces are chosen because the width of the indentation will be uniform regardless of the environment, whereas tabs can vary across environments.
 
+### River Alignment <a id="river-alignment"></a>
+Another approach to indentation is known as "River Alignment".  River alignment creates a visual division in the query consisting of a single space between SQL keywords on the left and the additional SQL that describes those keywords on the right.  Looking at the River Alignment example below, the "river" can be seen "flowing" down the middle of the query.  River Alignment is easier to read than the alignment style proposed by this style guide, however, river alignment is not chosen because of the length time required to apply river alignment styling.
+<pre>
+-- A: River Alignment Style
+
+   SELECT ST.Name AS StoreName
+        , IT.Name AS ItemName
+        , SA.SaleDate
+        , CU.Name AS CustomerName
+
+     FROM AlohaCo.Retail.Sale AS SA
+
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+       ON SA.CustomerId = CU.CustomerId
+
+LEFT JOIN AlohaCo.Retail.Item AS IT
+       ON SA.ItemId = IT.ItemId
+
+LEFT JOIN AlohaCo.Retail.Store AS ST
+       ON SA.StoreId = ST.StoreId
+      AND Sale.SaleDate >= ST.EffectiveStartDate
+      AND Sale.SaleDate <= ST.EffectiveEndDate
+
+    WHERE CU.StartDate >= '1/1/2000'
+
+
+-- B: Readability Alignment Style
+
+SELECT
+      ST.Name AS StoreName
+    , IT.Name AS ItemName
+    , SA.SaleDate
+    , CU.Name AS CustomerName
+
+FROM AlohaCo.Retail.Sale AS SA
+
+LEFT JOIN AlohaCo.Retail.Customer AS CU
+    ON SA.CustomerId = CU.CustomerId
+
+LEFT JOIN AlohaCo.Retail.Item AS IT
+    ON SA.ItemId = IT.ItemId
+
+LEFT JOIN AlohaCo.Retail.Store AS ST
+    ON SA.StoreId = ST.StoreId
+    AND Sale.SaleDate >= ST.EffectiveStartDate
+    AND Sale.SaleDate <= ST.EffectiveEndDate
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+</pre>
   ---
 </details>
 
@@ -1218,14 +1268,14 @@ GROUP BY
 ## Joins
 ### <span style="color: green">A. Good</span>
 * Do not use `OUTER` in the `JOIN` keywords (e.g. `LEFT OUTER JOIN`)
-* Do not use the "old" style of joining tables where all tables are listed in the `FROM` statement and then joined in the WHERE statement.
+* Do not use the "old" style of joining tables where all tables are listed in the `FROM` statement and then joined in the `WHERE` statement.
 * The join condition (`ON` keyword) should be on a separate line from the table with one indentation.
 * If the join has more than one condition to join on, each subsequent condition should align with the `ON`.
 * The ordering of the table in the join condition should be: table you are joining from &lt;operator&gt; table you are joining to
 
 <pre>
 SELECT
-      ST.Name as StoreName
+      ST.Name AS StoreName
     , IT.Name AS ItemName
     , SA.SaleDate
     , CU.Name AS CustomerName
@@ -1251,7 +1301,7 @@ WHERE
 * Misaligned join condition
 <pre>
 SELECT
-      ST.Name as StoreName
+      ST.Name AS StoreName
     , IT.Name AS ItemName
     , SA.SaleDate
     , CU.Name AS CustomerName
@@ -1279,7 +1329,7 @@ WHERE
 * First Join condition should immediately follow the `ON` keyword on the same line
 <pre>
 SELECT
-      ST.Name as StoreName
+      ST.Name AS StoreName
     , IT.Name AS ItemName
     , SA.SaleDate
     , CU.Name AS CustomerName
@@ -1307,7 +1357,7 @@ WHERE
 * Join condition not on its own line
 <pre>
 SELECT
-      ST.Name as StoreName
+      ST.Name AS StoreName
     , IT.Name AS ItemName
     , SA.SaleDate
     , CU.Name AS CustomerName
