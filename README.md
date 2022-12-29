@@ -4,12 +4,12 @@ Want to get straight to the good stuff?  Jump to the [guide](https://github.com/
 
 
 <details>
-  <summary>View a fully styled example query</summary>
+  <summary>View a fully styled query</summary>
 
 ---
 
 ```sql
--- Determine the first shirt sale for every customer</mark>
+-- Determine the first shirt sale for every customer
 WITH FirstShirtSale AS (
     SELECT
           SA.CustomerId
