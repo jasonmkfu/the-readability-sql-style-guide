@@ -2,6 +2,75 @@
 
 Want to get straight to the good stuff?  Jump to the [guide](https://github.com/jasonmkfu/the-readability-sql-style-guide/blob/main/Style%20Guide.md)!
 
+
+<details open>
+  <summary>View an fully styled example query</summary>
+---
+
+```sql
+-- Determine the first shirt sale for every customer</mark>
+WITH FirstShirtSale AS (
+    SELECT
+          SA.CustomerId
+        , MIN(SA.SaleDate) AS FirstSaleDate
+
+    FROM AlohaCo.Retail.Sale AS SA
+
+    WHERE
+        SA.CategoryId = 1 -- Shirts
+
+    GROUP BY
+        SA.CustomerId
+)
+
+-- Determine the first sale for every customer (regardless of the item category)
+, FirstAnySale AS (
+    SELECT
+          SA.CustomerId
+        , MIN(SA.SaleDate) AS FirstSaleDate
+
+    FROM AlohaCo.Retail.Sale AS SA
+
+    GROUP BY
+        SA.CustomerId
+)
+
+SELECT
+      CU.Name AS CustomerName
+    , FSS.FirstSaleDate AS FirstShirtSaleDate
+    , FAS.FirstSaleDate AS FirstAnySaleDate
+    , ROW_NUMBER() OVER (
+        PARTITION BY
+              CU.CustomerId
+            , SA.StoreId
+        ORDER BY
+              SA.SaleDate ASC
+            , SA.TransactionId ASC
+      ) AS SaleRowNumber
+
+FROM AlohaCo.Retail.Customer AS CU
+
+LEFT JOIN AlohaCo.Retail.Sale AS SA
+    ON CU.CustomerId = SA.CustomerId
+
+LEFT JOIN FirstShirtSale AS FSS
+    ON CU.CustomerId = FSS.CustomerId
+
+LEFT JOIN FirstAnySale AS FAS
+    ON CU.CustomerId = FAS.CustomerId
+
+WHERE
+    CU.StartDate >= '1/1/2000'
+    AND CU.CustomerLoyaltyCardLevel IN (
+          1   -- Bronze
+        , 2   -- Silver
+        , 3   -- Gold
+        , 202 -- Platinum
+    )
+```
+
+---
+</details>
 ## Overview
 SQL styling varies greatly from person to person.  This style guide defines a single way for all styles and seeks to explain the reasoning behind that choice.  The style guide often chooses readability over efficiency or succinctness, but will sometimes sacrifices readability for the sake of practicality.
 

@@ -139,7 +139,7 @@ WHERE
 </pre>
 
 ## Spaces
-Eliminating trailing spaces is good practice to maintain clean code.  Spaces preceding and following logical operations uses white space to dilineate the logical operator from the two expressions.
+Eliminating trailing spaces is good practice to maintain clean code.  Spaces preceding and following logical operations use white space to dilineate the logical operator from the two expressions.
 ### <span style="color: green">A. Good</span>
 * Each section of SQL code should NOT have trailing spaces (trailing spaces are normally not visible unless you highlight multiple rows of text or your text editor settings are set to show spaces/tabs)
 * Logical operators in equations/conditions should have spaces before and after them
@@ -1104,7 +1104,6 @@ SELECT
     <mark>∙∙∙∙</mark>PARTITION BY
             <mark>∙∙</mark>SA.CustomerId
             , SA.StoreId
-            , HA.FinancialClassDSC
     <mark>∙∙∙∙</mark>ORDER BY
               SA.SaleDate ASC
             , SA.TransactionId ASC
@@ -1134,7 +1133,7 @@ SELECT
     , SA.SaleAmount
     , ROW_NUMBER() OVER
     <mark>(</mark>
-    <mark>P</mark>ARTITION BY<mark> </mark>SA.CustomerId<mark>, </mark>SA.StoreId<mark>, </mark>HA.FinancialClassDSC
+    <mark>P</mark>ARTITION BY<mark> </mark>SA.CustomerId<mark>, </mark>SA.StoreId
     <mark>O</mark>RDER BY
         <mark>S</mark>A.SaleDate ASC
         , SA.TransactionId ASC<mark>)</mark> AS SaleRowNumber
@@ -1150,7 +1149,7 @@ WHERE
 ## Aliases
 ### <span style="color: green">A. Good</span>
 * Aliases should be applied to fields, `CASE` statements, multiple tables, and sub-queries
-* All aliases should use the AS keyword. Do not use the "=" sign in place of the `AS` keyword
+* All aliases should use the `AS` keyword. Do not use the "=" sign in place of the `AS` keyword
 * Do not use an alias with a space in it
 * Do not use the table alias convention of A, B, C, etc. or some other ordinal structure
 
@@ -1460,7 +1459,7 @@ WHERE
 </pre>
 ### <span style="color: red">C. Not So Good</span>
 * `AS` is on a separate line from the CTE name
-* , follows the end of the CTE rather than preceding the next CTE declaration
+* `1` follows the end of the CTE rather than preceding the next CTE declaration
 * No comments explaining the content of each CTE
 * Closing parentheses of the CTE is not on its own line
 <pre>
