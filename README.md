@@ -4,7 +4,8 @@ Want to get straight to the good stuff?  Jump to the [guide](https://github.com/
 
 
 <details open>
-  <summary>View an fully styled example query</summary>
+  <summary>View a fully styled example query</summary>
+
 ---
 
 ```sql
