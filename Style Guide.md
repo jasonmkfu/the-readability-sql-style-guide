@@ -36,7 +36,7 @@ Indentation is common practice across all programming languages.  In SQL, it ass
   While there is debate between indenting using tabs or spaces, spaces are chosen because the width of the indentation will be uniform regardless of the environment, whereas tabs can vary across environments.
 
 ### River Alignment <a id="river-alignment"></a>
-Another approach to indentation is known as "River Alignment".  River alignment creates a visual division in the query consisting of a single space between SQL keywords on the left and the additional SQL that describes those keywords on the right.  Looking at the River Alignment example below, the "river" can be seen "flowing" down the middle of the query.  River Alignment is easier to read than the alignment style proposed by this style guide, however, river alignment is not chosen because of the length time required to apply river alignment styling.
+Another approach to indentation is known as "River Alignment".  River alignment creates a visual division in the query consisting of a single space between SQL keywords on the left and the SQL that describes those keywords on the right.  Looking at the River Alignment example below, the "river" can be seen "flowing" down the middle of the query.  River Alignment is easier to read than the alignment style proposed by this style guide, however, river alignment is not the chosen style because of the length time required to apply river alignment styling.
 <pre>
 -- A: River Alignment Style
 
@@ -89,7 +89,7 @@ WHERE
 </details>
 
 ### <span style="color: green">A. Good</span>
-* Indentation should identify that the code relates to the section it is indented from, e.g. the indented lines from a `SELECT` keyword indicate that the code relates to a `SELECT` statement
+* Indentation helps identify portions of code related its parent SQL keyword, e.g. the indented lines beneath a `SELECT` keyword indicate that those lines relate to the preceding parent
 * Each indentation should consist of four (4) space characters
 
 _Note: The bullet/arrow characters in the examples below are used to illustrate the use of spaces/tabs and should not be included in the SQL_
@@ -142,7 +142,7 @@ WHERE
 Eliminating trailing spaces is good practice to maintain clean code.  Spaces preceding and following logical operations use white space to dilineate the logical operator from the two expressions.
 ### <span style="color: green">A. Good</span>
 * Each section of SQL code should NOT have trailing spaces (trailing spaces are normally not visible unless you highlight multiple rows of text or your text editor settings are set to show spaces/tabs)
-* Logical operators in equations/conditions should have spaces before and after them
+* Logical operators in equations/conditions should have preceding and following spaces
 
 <pre>
 SELECT
@@ -159,7 +159,7 @@ WHERE
 
 ### <span style="color: red">B. Not so Good</span>
 * Trailing spaces
-* No space before and after the "=" operator
+* No space before and after the `=` operator
 
  _Note: The bullet characters in the example below are used to illustrate the use of spaces and should not be included in the SQL_
 <pre>
@@ -177,10 +177,9 @@ WHERE
 
 
 ## Fully Qualified Table/View Names
-
-Some Integrated Development Environments (IDE), such as SQL Server Management Studio, allow users to define the working database for a particular query.  This allows users to ommit the database when referencing tables/views e.g. using `Retail.Customer` instead of `AlohaCo.Retail.Customer`.  Using Fully Qualified Names (FQN) removes database ambiguity by always listing the database.  This is especially helpful when SQL is shared to others.
+Some Integrated Development Environments (IDE), such as SQL Server Management Studio, allow users to define the working database for a particular query.  This allows users to omit the database when referencing tables/views e.g. using `Retail.Customer` instead of `AlohaCo.Retail.Customer`.  Using Fully Qualified Names (FQN) removes database ambiguity by always listing the database.  This is especially helpful when SQL is shared to others.
 ### <span style="color: green">A. Good</span>
-* Use fully qualified names for tables and views: Database.Schema.TableOrViewName.
+* Use fully qualified names for tables and views: Database.Schema.TableOrViewName
 <pre>
 SELECT
       CU.Name
@@ -212,9 +211,9 @@ WHERE
 
 
 ## Comparison Operators
-SQL engines often have a variety of comparison operators, with some consistent across most engines and others being engine specific.  The six (6) operators defined in the style are those common across most engines.
+SQL engines often have a variety of comparison operators, with some consistent across most engines and others being engine specific.  The six operators defined in the style are those common across most engines.
 ### <span style="color: green">A. Good</span>
-* While other operators may function in a similar manner, only use the six comparison operators listed below.
+* While other operators may function in a similar manner, only use the six comparison operators listed below
 <pre>
 =    Equal to
 <>   Not equal to
@@ -235,13 +234,13 @@ SQL engines often have a variety of comparison operators, with some consistent a
 Comments can help the reader to understand background information or particular portions of complicated SQL.  Comments can also serve as a way to document changes that have occurred over time by documenting changes done on a specific date.
 ### <span style="color: green">A. Good</span>
 * Do not insert comments that are not useful
-* Use block style comments with `/*` and `*/` for three (3) or more lines of comments.  For block comments, the beginning and ending comment clauses should be on separate lines with the text comments set to one indentation between the clauses
-* Use `--` for one (1) to two (2) lines of comments. A space character should immediately follow the beginning of either a single line or block comment declaration
+* Use block style comments with `/*` and `*/` for three (3) or more lines of comments.  For block comments, the beginning and ending comment clauses should be on separate lines with the text comments set to one (1) indentation between the clauses
+* Use `--` for one (1) to two (2) lines of comments and a space character should immediately follow the beginning of either a single line or block comment declaration
 <pre>
 <mark>/*</mark>
-   Comments that span three or more lines should use block comments
+   Comments that span three (3) or more lines should use block comments
    rather than single-line comments.  Using block comments makes
-   reading long comments easier to read than using single-line
+   reading long comments easier to read than single-line
    comments.
 <mark>*/</mark>
 
@@ -250,7 +249,7 @@ SELECT
     , SA.CategoryId
     , SA.SubCategoryId
 
-    <mark>--</mark> This is an example of usign single-line comments to provide
+    <mark>--</mark> This is an example of using single-line comments to provide
     <mark>--</mark> further information about the SUM aggregation below
     , SUM(SA.SaleAmount) AS SaleAmountTotal
 
@@ -271,13 +270,13 @@ GROUP BY
 </pre>
 
 ### <span style="color: red">B. Not so Good</span>
-* No usage of block comments for comments that span three or more lines
+* No usage of block comments for comments that span three (3) or more lines
 * No space following single line comments
 
 <pre>
-<mark>--</mark> Comments that span three or more lines should use block comments
+<mark>--</mark> Comments that span three (3) or more lines should use block comments
 <mark>--</mark> rather than single-line comments.  Using block comments makes
-<mark>--</mark> reading long comments easier to read than using single-line
+<mark>--</mark> reading long comments easier to read than single-line comments
 SELECT
       SA.StoreId
     , SA.CategoryId
@@ -339,9 +338,6 @@ Sometimes it is useful to stylize your comments to indicate different sections o
                       SA.StoreId
                     , SA.CategoryId
                     , SA.SubCategoryId
-
-                    -- This is an example of using single-line comments to provide
-                    -- further information about the SUM aggregation below
                     , SUM(SA.SaleAmount) AS SaleAmountTotal
 
                 FROM AlohaCo.Retail.Sale AS SA
@@ -389,9 +385,6 @@ Sometimes it is useful to stylize your comments to indicate different sections o
         SA.StoreId
     , SA.CategoryId
     , SA.SubCategoryId
-
-    -- This is an example of using single-line comments to provide
-    -- further information about the SUM aggregation below
     , SUM(SA.SaleAmount) AS SaleAmountTotal
 
 <mark>FR</mark>OM AlohaCo.Retail.Sale AS SA
@@ -430,7 +423,7 @@ function example()
     return;
 }
 </pre>
-While SQL does not have curly braces, a similar situation occurs in SQL with the usage of parentheses.  While it can be agreed upon to put the closing parentheses on a new line, the bigger question is if the opening parentheses should be placed on the same line as the logical operator or begin on a new line?  The two choices are illustrated below.  The same line approach is chosen because the left parentheses being "attached" to the `OR` allows the reader to process the logical operator in their mind in one step: "This is an `OR` block and everything on the next line is related to it."  Whereas the new line approach requires a two-step thought process: "This is an `OR`...okay let me look at the next line.  This is a parentheses...okay this must be related to the `OR` on the preceding line."
+While SQL does not have curly braces, a similar situation occurs in SQL with the usage of parentheses.  While it generally can be agreed upon to put the closing parentheses (or curly braces) on a new line, the bigger question is if the opening parentheses should be placed on the same line as the logical operator or begin on a new line?  The two choices are illustrated below.  The same line approach is chosen because the left parentheses being "attached" to the `OR` allows the reader to process the logical operator in their mind in one step: "This is an `OR` block and everything on the next line is related to it."  Whereas the new line approach requires a two-step thought process: "This is an `OR`...okay let me look at the next line.  This is a parentheses...okay this must be related to the `OR` on the preceding line."
 <pre>
 -- A: Same line opening parentheses
 WHERE
@@ -533,7 +526,7 @@ WHERE
 
 
 ## New Lines
-This is a debatable style requirement, especially for simple queries with only a few fields or tables.  However, the majority of queries will not be simple.  Consequently, by inserting new lines in-between SQL keyword sections, it assists readability by using white space to distinguish different sections of code.
+This is a debatable style requirement, especially for simple queries with only a few fields or tables.  However, the majority of queries will not be simple.  Consequently, inserting new lines in-between SQL keyword sections assists readability by using white space to distinguish different sections of code.
 
 <details>
   <summary>Further Discussion</summary>
@@ -564,6 +557,7 @@ GROUP BY
     , CU.StartDate
     , CU.PhoneNumber
     , CU.EmailAddress
+
 
 -- B: Query without New Lines
 SELECT
@@ -728,8 +722,8 @@ WHERE
 </pre>
 
 
-## Multiple Item Listing
-There is varying opinion regarding leading or trailing commas.  Leading commas are recommended for this style because it is easier to identify missing commas while adding new fields because they line up vertically.  Similarly, opinion on first-item alignment also differs, however, the style guide opts for first-item alignment as it makes easier to read a list of fields.
+## Multiple Item Listing <a id="one-to-many-new-line-rule"></a>
+There is varying opinion regarding leading or trailing commas.  Leading commas are recommended for this style because it is easier to identify missing commas while adding new fields because they line up vertically.  Similarly, opinion on first-item alignment also differs, however, the style guide opts for [first-item alignment](#first-item-alignment-rule) as it makes easier to read a list of fields.
 
 <details>
   <summary>Further Discussion</summary>
@@ -737,6 +731,7 @@ There is varying opinion regarding leading or trailing commas.  Leading commas a
 ---
 
 Both examples below of leading and trailing commas are equally readable.  In both cases, the items in the listed fields are aligned with one another and on seaparate lines which improve readability.  Given that the two styles are equally readable, trailing commas are chosen simply because it is easier to identify missing commas when debugging errors.
+
 <pre>
 -- A: Leading Commas
 SELECT
@@ -767,7 +762,7 @@ WHERE
 </details>
 
 ### <span style="color: green">A. Good</span>
-* Each field should be on its own line with one indent to the right of the clause it is relating to (`SELECT`, `WHERE`, `GROUP BY`, etc.)
+* Each field should be on its own line with one (1) indent to the right of the clause it is relating to (`SELECT`, `WHERE`, `GROUP BY`, etc.)
 * Each subsequent field should utilize leading commas
 * One (1) space should immediately follow the comma followed by the field name
 
@@ -846,7 +841,7 @@ WHERE
 ## FROM
 Because there is only ever one table/view that follows the `FROM` keyword, the table/view is placed on the same line rather than on a separate line.
 ### <span style="color: green">A. Good</span>
-* The `FROM` keyword should include the table name on the same line.  It should NOT be placed on its own line.
+* The `FROM` keyword should include the table name on the same line and should NOT be placed on its own line
 <pre>
 SELECT
       CU.Name
@@ -877,7 +872,7 @@ WHERE
 
 
 ## WHERE
-The `WHERE` clause can include one or many predicates.  While it may make sense when there is only one predicate that it exist on the same line as the `WHERE` keyword, because many predicates can also exist, the style guide opts for a consistent rule for all cases and requires the separate lines approach.  First-item alignment should not be used due to the varying indentation that would be required because of the different lengths of `AND` and `OR` keywords.
+The `WHERE` clause can include one-to-many predicates.  While it may make sense when there is only one predicate that it exist on the same line as the `WHERE` keyword, because many predicates can also exist, the style guide opts for a consistent rule for all cases and requires the separate lines approach.  First-item alignment should not be used due to the varying indentation that would be required because of the different lengths of `AND` and `OR` keywords.
 ### <span style="color: green">A. Good</span>
 * The `WHERE` clause should exist on its own line
 * Each logical condition in the `WHERE` clause should be placed on its own line with appropriate indentation
@@ -975,13 +970,13 @@ WHERE
 
 
 ## IN
-Values in an `IN` statement should be treated similarly to the Multiple Item Listing style with the addition of adding the name equivalent for values that represent an ID or code.  Including the "name" equivalent helps the reader understand what the list represents without having to write another query to determine the "names" of the listed values.
+Values in an `IN` statement should be treated similarly to the [Multiple Item Listing style](#multiple-item-listing) with the addition of adding the name equivalent for values that represent an ID or code.  Including the "name" equivalent helps the reader understand what the list represents without having to write another query to determine the names of the listed values.
 ### <span style="color: green">A. Good</span>
-* Each field should be on its own line with one indent to the right of the opening parentheses
+* Each field should be on its own line with one (1) indent to the right of the opening parentheses
 * Each subsequent field should utilize leading commas
 * One (1) space should immediately follow the comma followed by the field name
 * For values representing IDs or codes, the "name" equivalent should be included
-* The name equivalent should be aligned for all values and begin one space after the longest listed value
+* The name equivalent should be aligned for all values and begin one (1) space after the longest listed value
 <pre>
 SELECT
       CU.Name
@@ -1037,7 +1032,7 @@ WHERE
 </pre>
 
 ### <span style="color: red">D. Not so Good</span>
-* "Name" equivalents are not aligned to one space after the right-most value
+* "Name" equivalents are not aligned to one (1) space after the right-most value
 <pre>
 SELECT
       CU.Name
@@ -1089,7 +1084,7 @@ Window functions can add additional complexity to the `SELECT` statement.  The w
 * Field names in the `PARTITION BY` or `ORDER BY` clause should be indented an additional time from the Window function
 * Field names in the `PARTITION BY` or `ORDER BY` clause should be on separate line with first-item alignment applied
 * The closing parentheses should be on a separate line along with an alias
-* The closing parentheses should be indented two spaces to align with the Window Function
+* The closing parentheses should be indented two (2) spaces to align with the Window Function
 * Due to the complexity of window functions, blank lines should both precede and follow each window function
 
 <pre>
@@ -1149,13 +1144,13 @@ WHERE
 ## Aliases
 ### <span style="color: green">A. Good</span>
 * Aliases should be applied to fields, `CASE` statements, multiple tables, and sub-queries
-* All aliases should use the `AS` keyword. Do not use the "=" sign in place of the `AS` keyword
+* All aliases should use the `AS` keyword. Do not use the `=` sign in place of the `AS` keyword
 * Do not use an alias with a space in it
 * Do not use the table alias convention of A, B, C, etc. or some other ordinal structure
 
 | ★ P-SQL Exception ★         |
 |:---------------------------|
-| In P-SQL you cannot use the AS keyword on tables.  In such cases, simply do not use the AS keyword, but still utilize the `AS` keyword for fieldnames.|
+| In P-SQL you cannot use the `AS` keyword on tables.  In such cases, simply do not use the `AS` keyword, but still utilize the `AS` keyword for fieldnames.|
 
 <pre>
 SELECT
@@ -1190,7 +1185,7 @@ GROUP BY
     , CU.EmailAddress
 </pre>
 ### <span style="color: red">B. Not so Good</span>
-* Uses the equal (=) sign to assingn an alias, use `AS`
+* Uses the equal `=` sign to assingn an alias, use `AS`
 * Spaces included in the alias name
 * `AS` does not precede table/view alias
 <pre>
@@ -1268,9 +1263,12 @@ GROUP BY
 ### <span style="color: green">A. Good</span>
 * Do not use `OUTER` in the `JOIN` keywords (e.g. `LEFT OUTER JOIN`)
 * Do not use the "old" style of joining tables where all tables are listed in the `FROM` statement and then joined in the `WHERE` statement.
-* The join condition (`ON` keyword) should be on a separate line from the table with one indentation.
+* The join condition (`ON` keyword) should be on a separate line from the table with one (1) indentation.
 * If the join has more than one condition to join on, each subsequent condition should align with the `ON`.
-* The ordering of the table in the join condition should be: table you are joining from &lt;operator&gt; table you are joining to
+* The join condition should be ordered:
+    * The table you are joining "from"
+    * The &lt;operator&gt;
+    * The table you are joining "to"
 
 <pre>
 SELECT
@@ -1324,8 +1322,8 @@ WHERE
 
 ### <span style="color: red">C. Not so Good</span>
 * Misaligned `JOIN` conditions
-* Table ordering in join condition is not table you are joining from <operator> table you are joining to
-* First Join condition should immediately follow the `ON` keyword on the same line
+* Table ordering in join condition is in reverse order, i.e. `CU.CustomerId = SA.CustomerId` instead of `SA.CustomerId = CU.CustomerId`
+* First join condition should immediately follow the `ON` keyword on the same line
 <pre>
 SELECT
       ST.Name AS StoreName
@@ -1378,7 +1376,7 @@ WHERE
 ## CTEs and Sub-Queries
 ### <span style="color: green">A. Good</span>
 * The opening parentheses for each CTE should be preceded by a space and immediately follow the name of the CTE, e.g. `WITH CTEName AS (`
-* Place the ensuing `SELECT` statement on a new line with one indentation
+* Place the ensuing `SELECT` statement on a new line with one (1) indentation
 * Apply all other styles within the CTE as would for any other `SELECT` statement
 * Closing parentheses should be on a separate line and align with the CTE’s declaration
 * Add comments describing the contents of the CTE immediately preceding each CTE declaration
@@ -1459,7 +1457,7 @@ WHERE
 </pre>
 ### <span style="color: red">C. Not So Good</span>
 * `AS` is on a separate line from the CTE name
-* `1` follows the end of the CTE rather than preceding the next CTE declaration
+* `,` follows the end of the CTE rather than preceding the next CTE declaration
 * No comments explaining the content of each CTE
 * Closing parentheses of the CTE is not on its own line
 <pre>
@@ -1526,7 +1524,7 @@ WHERE
 # Appendix
 
 ## One-to-Many New Line Rule <a id="one-to-many-new-line-rule"></a>
-For lists of fields or conditions, where there can be one to many instances, the list is always started on a new line.  In the example below, the `IN` keyword has one-to-many values, thus the list starts on a new line.
+For lists of fields or conditions, where there can be one-to-many instances, the list is always started on a new line.  In the example below, the `IN` keyword has one-to-many values, thus the list starts on a new line.
 <pre>
 CU.CustomerLoyaltyCardLevel IN (
       1   -- Bronze
@@ -1553,3 +1551,7 @@ FROM AlohaCo.Database.Retail.Customer AS CU
 </pre>
 The `FROM` keyword on the other hand, is a one-and-only-one SQL keyword and thus the table/view following the `FROM` keyword can remain on the same line.
 Note: While old-style joins would make `FROM` a one-to-many keyword, the style guide does not allow old-style joins so it remains a one-and-only-one keyword.
+
+
+## First Item Alignment Rule <a id="first-item-alignment-rule"></a>
+It is acknowledged that extra time is required to maintain first-item
