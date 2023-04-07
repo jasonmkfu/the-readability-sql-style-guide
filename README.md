@@ -1,8 +1,8 @@
 # The Readability SQL Style Guide
 
-Want to get straight to the good stuff?  Jump to the [guide](https://github.com/jasonmkfu/the-readability-sql-style-guide/blob/main/Style%20Guide.md)!
+★ Want to get straight to the good stuff?  Jump to the [guide](https://github.com/jasonmkfu/the-readability-sql-style-guide/blob/main/Style%20Guide.md)!
 
-
+★ Want to see what a query looks like fully styled?  Expand the dropdown below!
 <details>
   <summary>View a fully styled query</summary>
 

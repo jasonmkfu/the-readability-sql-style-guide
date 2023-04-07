@@ -1520,6 +1520,68 @@ WHERE
     CU.StartDate >= '1/1/2000'
 </pre>
 
+## UNION
+### <span style="color: green">A. Good</span>
+* No other SQL should exist on the same line as the `UNION` or `UNION ALL` keywords
+* A blank line should precede and follow the `UNION` or `UNION ALL` keywords
+* `SELECT` statements involved in the union should be aligned with the `UNION` or `UNION ALL` keywords
+* Apply all other styles to `SELECT` statements involved in the union
+<pre>
+SELECT
+      SA.CustomerId
+    , MIN(SA.SaleDate) AS FirstSaleDate
+
+FROM AlohaCo.Retail.Sale AS SA
+
+WHERE
+    SA.CategoryId = 1 -- Shirts
+
+GROUP BY
+    SA.CustomerId
+<mark> </mark>
+<mark>UNION</mark>
+<mark> </mark>
+SELECT
+    SA.CustomerId
+    , MIN(SA.SaleDate) AS FirstSaleDate
+
+FROM AlohaCo.Retail.Sale AS SA
+
+WHERE
+    SA.CategoryId = 2 -- Shorts
+
+GROUP BY
+    SA.CustomerId
+</pre>
+
+### <span style="color: red">B. Not So Good</span>
+* `SELECT` statements involved with the union are indented
+* Second `SELECT` statement on the same line as the `UNION` keyword
+* No blank line preceding and following the `UNION` keyword
+<pre>
+<mark>    </mark>SELECT
+          SA.CustomerId
+        , MIN(SA.SaleDate) AS FirstSaleDate
+
+    FROM AlohaCo.Retail.Sale AS SA
+
+    WHERE
+        SA.CategoryId = 1 -- Shirts
+
+    GROUP BY
+        SA.CustomerId<mark> </mark>
+UNION <mark>SELECT</mark>
+<mark> </mark>         SA.CustomerId
+        , MIN(SA.SaleDate) AS FirstSaleDate
+
+<mark>    </mark>FROM AlohaCo.Retail.Sale AS SA
+
+    WHERE
+        SA.CategoryId = 2 -- Shorts
+
+    GROUP BY
+        SA.CustomerId
+</pre>
 
 # Appendix
 
